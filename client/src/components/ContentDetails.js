@@ -1,9 +1,9 @@
-import { Avatar, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import React from 'react';
-import HorizontalStack from './util/HorizontalStack';
 import Moment from 'react-moment';
-import UserAvatar from './UserAvatar';
 import { Link } from 'react-router-dom';
+import UserAvatar from './UserAvatar';
+import HorizontalStack from './util/HorizontalStack';
 
 const ContentDetails = ({ username, createdAt, edited, preview }) => {
   return (

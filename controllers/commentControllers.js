@@ -1,7 +1,5 @@
 const Comment = require('../models/Comment');
-const mongoose = require('mongoose');
 const Post = require('../models/Post');
-const paginate = require('../util/paginate');
 const cooldown = new Set();
 
 const createComment = async (req, res) => {

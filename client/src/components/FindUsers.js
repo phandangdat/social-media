@@ -1,10 +1,9 @@
 import {
-  Avatar,
   Card,
   Divider,
   IconButton,
   Stack,
-  Typography,
+  Typography
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';

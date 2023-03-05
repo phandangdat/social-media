@@ -1,9 +1,6 @@
 import { useTheme } from '@emotion/react';
 import {
-  autocompleteClasses,
-  Box,
-  Card,
-  CardActionArea,
+  Box
 } from '@mui/material';
 import React from 'react';
 import 'react-router-dom';

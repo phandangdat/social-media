@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Post = require('../models/Post');
-const User = require('../models/User');
 const Comment = require('../models/Comment');
 const PostLike = require('../models/PostLike');
 const paginate = require('../util/paginate');
@@ -170,7 +169,7 @@ const getPosts = async (req, res) => {
   try {
     const { userId } = req.body;
 
-    let { page, sortBy, author, search, liked } = req.query;
+    let { page, sortBy, author, search } = req.query;
 
     if (!sortBy) sortBy = '-createdAt';
     if (!page) page = 1;

@@ -1,20 +1,12 @@
 import {
-  Button,
-  Divider,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  Stack,
-  Typography,
+  Divider, IconButton, Stack,
+  Typography
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  AiFillBackward,
   AiFillCaretLeft,
-  AiFillMessage,
+  AiFillMessage
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { getMessages, sendMessage } from '../api/messages';

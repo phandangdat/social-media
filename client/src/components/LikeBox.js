@@ -2,7 +2,7 @@ import {
   IconButton,
   Stack,
   Typography,
-  useTheme,
+  useTheme
 } from '@mui/material';
 import React, { useState } from 'react';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';

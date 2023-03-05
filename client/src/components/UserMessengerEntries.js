@@ -1,11 +1,11 @@
 import { Box, Divider, List, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { AiFillMessage } from 'react-icons/ai';
+import 'react-icons/bi';
+import { BiSad } from 'react-icons/bi';
 import Loading from './Loading';
 import UserMessengerEntry from './UserMessengerEntry';
 import HorizontalStack from './util/HorizontalStack';
-import 'react-icons/bi';
-import { BiSad } from 'react-icons/bi';
 
 const UserMessengerEntries = (props) => {
   return !props.loading ? (

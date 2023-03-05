@@ -1,20 +1,15 @@
 import {
-  Alert,
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Stack,
+  Button, Container, Stack,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../api/users';
-import ErrorAlert from '../ErrorAlert';
 import { loginUser } from '../../helpers/authHelper';
 import Copyright from '../Copyright';
+import ErrorAlert from '../ErrorAlert';
 
 const LoginView = () => {
   const navigate = useNavigate();

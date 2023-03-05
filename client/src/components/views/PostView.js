@@ -1,16 +1,16 @@
 import { Container, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getPost } from '../../api/posts';
+import { isLoggedIn } from '../../helpers/authHelper';
+import Comments from '../Comments';
+import ErrorAlert from '../ErrorAlert';
 import GoBack from '../GoBack';
 import GridLayout from '../GridLayout';
 import Loading from '../Loading';
 import Navbar from '../Navbar';
 import PostCard from '../PostCard';
 import Sidebar from '../Sidebar';
-import { useParams } from 'react-router-dom';
-import { getPost } from '../../api/posts';
-import Comments from '../Comments';
-import ErrorAlert from '../ErrorAlert';
-import { isLoggedIn } from '../../helpers/authHelper';
 
 const PostView = () => {
   const params = useParams();

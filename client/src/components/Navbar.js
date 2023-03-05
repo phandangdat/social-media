@@ -1,28 +1,24 @@
 import { useTheme } from '@emotion/react';
 import {
-  Avatar,
-  IconButton,
+  Button, IconButton,
   Stack,
   TextField,
-  Typography,
-  Button,
-  InputAdornment,
+  Typography
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import 'react-icons/ai';
-import 'react-icons/ri';
 import {
   AiFillFileText,
   AiFillHome,
   AiFillMessage,
-  AiOutlineSearch,
+  AiOutlineSearch
 } from 'react-icons/ai';
+import 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import { isLoggedIn, logoutUser } from '../helpers/authHelper';
 import UserAvatar from './UserAvatar';
 import HorizontalStack from './util/HorizontalStack';
-import { RiContrast2Line } from 'react-icons/ri';
 
 const Navbar = () => {
   const navigate = useNavigate();

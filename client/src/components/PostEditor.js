@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
-  Link,
   Stack,
   TextField,
   Typography,
@@ -10,10 +9,10 @@ import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPost } from '../api/posts';
-import ErrorAlert from './ErrorAlert';
 import { isLoggedIn } from '../helpers/authHelper';
-import HorizontalStack from './util/HorizontalStack';
+import ErrorAlert from './ErrorAlert';
 import UserAvatar from './UserAvatar';
+import HorizontalStack from './util/HorizontalStack';
 
 const PostEditor = () => {
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 import { Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import Comment from './Comment';
-import Loading from './Loading';
-import { getComments } from '../api/posts';
 import { useParams } from 'react-router-dom';
+import { getComments } from '../api/posts';
+import Comment from './Comment';
 import CommentEditor from './CommentEditor';
+import Loading from './Loading';
 
 const Comments = () => {
   const [comments, setComments] = useState(null);

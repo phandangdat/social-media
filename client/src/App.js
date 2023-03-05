@@ -1,37 +1,25 @@
 import '@mui/material';
-import 'react-icons';
-import 'react-icons/bi';
-import 'react-icons/md';
-import 'react-icons/bs';
-import 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
+import 'react-icons';
+import 'react-icons/bi';
+import 'react-icons/bs';
+import 'react-icons/md';
+import 'react-router-dom';
 
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import theme from './theme';
 
-import PostView from './components/views/PostView';
-import CreatePostView from './components/views/CreatePostView';
-import ProfileView from './components/views/ProfileView';
-import LoginView from './components/views/LoginView';
-import SignupView from './components/views/SignupView';
-import ExploreView from './components/views/ExploreView';
 import PrivateRoute from './components/PrivateRoute';
-import SearchView from './components/views/SearchView';
+import CreatePostView from './components/views/CreatePostView';
+import ExploreView from './components/views/ExploreView';
+import LoginView from './components/views/LoginView';
 import MessengerView from './components/views/MessengerView';
-import {
-  initiateSocketConnection,
-  socket,
-} from './helpers/socketHelper';
-import { useEffect } from 'react';
-import { BASE_URL } from './config';
-import { io } from 'socket.io-client';
+import PostView from './components/views/PostView';
+import ProfileView from './components/views/ProfileView';
+import SearchView from './components/views/SearchView';
+import SignupView from './components/views/SignupView';
+import { initiateSocketConnection } from './helpers/socketHelper';
 
 function App() {
   initiateSocketConnection();

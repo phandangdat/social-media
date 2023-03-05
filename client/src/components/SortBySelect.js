@@ -1,11 +1,9 @@
 import {
-  FormControl,
   MenuItem,
   Select,
-  Typography,
+  Typography
 } from '@mui/material';
-import React, { useState } from 'react';
-import { BiNoEntry } from 'react-icons/bi';
+import React from 'react';
 import HorizontalStack from './util/HorizontalStack';
 
 const SortBySelect = ({ onSortBy, sortBy, sorts }) => {
