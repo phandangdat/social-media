@@ -5,26 +5,26 @@ import {
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createPost } from "../api/posts";
-import ErrorAlert from "./ErrorAlert";
-import { isLoggedIn } from "../helpers/authHelper";
-import HorizontalStack from "./util/HorizontalStack";
-import UserAvatar from "./UserAvatar";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createPost } from '../api/posts';
+import ErrorAlert from './ErrorAlert';
+import { isLoggedIn } from '../helpers/authHelper';
+import HorizontalStack from './util/HorizontalStack';
+import UserAvatar from './UserAvatar';
 
 const PostEditor = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    title: "",
-    content: "",
+    title: '',
+    content: '',
   });
 
-  const [serverError, setServerError] = useState("");
+  const [serverError, setServerError] = useState('');
   const [errors, setErrors] = useState({});
   const user = isLoggedIn();
 
@@ -43,7 +43,7 @@ const PostEditor = () => {
     if (data && data.error) {
       setServerError(data.error);
     } else {
-      navigate("/posts/" + data._id);
+      navigate('/posts/' + data._id);
     }
   };
 
@@ -58,7 +58,11 @@ const PostEditor = () => {
       <Stack spacing={1}>
         {user && (
           <HorizontalStack spacing={2}>
-            <UserAvatar width={50} height={50} username={user.username} />
+            <UserAvatar
+              width={50}
+              height={50}
+              username={user.username}
+            />
             <Typography variant="h5">
               What would you like to post today {user.username}?
             </Typography>

@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const Post = require("../models/Post");
-const User = require("../models/User");
-const Comment = require("../models/Comment");
-const PostLike = require("../models/PostLike");
-const paginate = require("../util/paginate");
+const mongoose = require('mongoose');
+const Post = require('../models/Post');
+const User = require('../models/User');
+const Comment = require('../models/Comment');
+const PostLike = require('../models/PostLike');
+const paginate = require('../util/paginate');
 const cooldown = new Set();
 
 const createPost = async (req, res) => {
@@ -11,12 +11,12 @@ const createPost = async (req, res) => {
     const { title, content, userId } = req.body;
 
     if (!(title && content)) {
-      throw new Error("All input required");
+      throw new Error('All input required');
     }
 
     if (cooldown.has(userId)) {
       throw new Error(
-        "You are posting too frequently. Please try again shortly."
+        'You are posting too frequently. Please try again shortly.',
       );
     }
 
@@ -43,15 +43,15 @@ const getPost = async (req, res) => {
     const { userId } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(postId)) {
-      throw new Error("Post does not exist");
+      throw new Error('Post does not exist');
     }
 
     const post = await Post.findById(postId)
-      .populate("poster", "-password")
+      .populate('poster', '-password')
       .lean();
 
     if (!post) {
-      throw new Error("Post does not exist");
+      throw new Error('Post does not exist');
     }
 
     if (userId) {
@@ -72,11 +72,11 @@ const updatePost = async (req, res) => {
     const post = await Post.findById(postId);
 
     if (!post) {
-      throw new Error("Post does not exist");
+      throw new Error('Post does not exist');
     }
 
     if (post.poster != userId && !isAdmin) {
-      throw new Error("Not authorized to update post");
+      throw new Error('Not authorized to update post');
     }
 
     post.content = content;
@@ -98,11 +98,11 @@ const deletePost = async (req, res) => {
     const post = await Post.findById(postId);
 
     if (!post) {
-      throw new Error("Post does not exist");
+      throw new Error('Post does not exist');
     }
 
     if (post.poster != userId && !isAdmin) {
-      throw new Error("Not authorized to delete post");
+      throw new Error('Not authorized to delete post');
     }
 
     await post.remove();
@@ -138,12 +138,12 @@ const getUserLikedPosts = async (req, res) => {
     const { userId } = req.body;
     let { page, sortBy } = req.query;
 
-    if (!sortBy) sortBy = "-createdAt";
+    if (!sortBy) sortBy = '-createdAt';
     if (!page) page = 1;
 
     let posts = await PostLike.find({ userId: likerId })
       .sort(sortBy)
-      .populate({ path: "postId", populate: { path: "poster" } })
+      .populate({ path: 'postId', populate: { path: 'poster' } })
       .lean();
 
     posts = paginate(posts, 10, page);
@@ -172,11 +172,11 @@ const getPosts = async (req, res) => {
 
     let { page, sortBy, author, search, liked } = req.query;
 
-    if (!sortBy) sortBy = "-createdAt";
+    if (!sortBy) sortBy = '-createdAt';
     if (!page) page = 1;
 
     let posts = await Post.find()
-      .populate("poster", "-password")
+      .populate('poster', '-password')
       .sort(sortBy)
       .lean();
 
@@ -186,7 +186,7 @@ const getPosts = async (req, res) => {
 
     if (search) {
       posts = posts.filter((post) =>
-        post.title.toLowerCase().includes(search.toLowerCase())
+        post.title.toLowerCase().includes(search.toLowerCase()),
       );
     }
 
@@ -212,13 +212,16 @@ const likePost = async (req, res) => {
     const post = await Post.findById(postId);
 
     if (!post) {
-      throw new Error("Post does not exist");
+      throw new Error('Post does not exist');
     }
 
-    const existingPostLike = await PostLike.findOne({ postId, userId });
+    const existingPostLike = await PostLike.findOne({
+      postId,
+      userId,
+    });
 
     if (existingPostLike) {
-      throw new Error("Post is already liked");
+      throw new Error('Post is already liked');
     }
 
     await PostLike.create({
@@ -244,13 +247,16 @@ const unlikePost = async (req, res) => {
     const post = await Post.findById(postId);
 
     if (!post) {
-      throw new Error("Post does not exist");
+      throw new Error('Post does not exist');
     }
 
-    const existingPostLike = await PostLike.findOne({ postId, userId });
+    const existingPostLike = await PostLike.findOne({
+      postId,
+      userId,
+    });
 
     if (!existingPostLike) {
-      throw new Error("Post is already not liked");
+      throw new Error('Post is already not liked');
     }
 
     await existingPostLike.remove();

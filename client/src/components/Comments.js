@@ -1,23 +1,23 @@
-import { Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import Comment from "./Comment";
-import Loading from "./Loading";
-import { getComments } from "../api/posts";
-import { useParams } from "react-router-dom";
-import CommentEditor from "./CommentEditor";
+import { Stack, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import Comment from './Comment';
+import Loading from './Loading';
+import { getComments } from '../api/posts';
+import { useParams } from 'react-router-dom';
+import CommentEditor from './CommentEditor';
 
 const Comments = () => {
   const [comments, setComments] = useState(null);
   const [rerender, setRerender] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const params = useParams();
 
   const fetchComments = async () => {
     const data = await getComments(params);
     if (data.error) {
-      setError("Failed to fetch comments");
+      setError('Failed to fetch comments');
     } else {
       setComments(data);
     }
@@ -53,12 +53,14 @@ const Comments = () => {
     if (removedComment.parent) {
       const parentComment = findComment(removedComment.parent);
       parentComment.children = parentComment.children.filter(
-        (comment) => comment._id !== removedComment._id
+        (comment) => comment._id !== removedComment._id,
       );
       setRerender(!rerender);
     } else {
       setComments(
-        comments.filter((comment) => comment._id !== removedComment._id)
+        comments.filter(
+          (comment) => comment._id !== removedComment._id,
+        ),
       );
     }
   };
@@ -121,7 +123,11 @@ const Comments = () => {
           paddingY={3}
         >
           <Box>
-            <Typography variant="h5" color="text.secondary" gutterBottom>
+            <Typography
+              variant="h5"
+              color="text.secondary"
+              gutterBottom
+            >
               No comments yet...
             </Typography>
             <Typography variant="body" color="text.secondary">

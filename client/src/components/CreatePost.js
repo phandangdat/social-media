@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
+import { Button } from '@mui/material';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -9,10 +9,10 @@ const CreatePost = () => {
     <Button
       variant="outlined"
       size="medium"
-      onClick={() => navigate("/posts/create")}
+      onClick={() => navigate('/posts/create')}
       sx={{
-        gap: "0.2rem",
-        whiteSpace: "nowrap",
+        gap: '0.2rem',
+        whiteSpace: 'nowrap',
       }}
     >
       <AiOutlinePlus style={{ flexShrink: 0 }} />

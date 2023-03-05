@@ -1,19 +1,28 @@
-import { Button, IconButton, Typography, useTheme } from "@mui/material";
-import { Box, compose } from "@mui/system";
-import React, { useState } from "react";
-import { AiFillEdit, AiOutlineLine, AiOutlinePlus } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
-import { isLoggedIn } from "../helpers/authHelper";
-import CommentEditor from "./CommentEditor";
-import ContentDetails from "./ContentDetails";
-import HorizontalStack from "./util/HorizontalStack";
-import { deleteComment, updateComment } from "../api/posts";
-import ContentUpdateEditor from "./ContentUpdateEditor";
-import Markdown from "./Markdown";
-import { MdCancel } from "react-icons/md";
-import { BiReply, BiTrash } from "react-icons/bi";
-import { BsReply, BsReplyFill } from "react-icons/bs";
-import Moment from "react-moment";
+import {
+  Button,
+  IconButton,
+  Typography,
+  useTheme,
+} from '@mui/material';
+import { Box, compose } from '@mui/system';
+import React, { useState } from 'react';
+import {
+  AiFillEdit,
+  AiOutlineLine,
+  AiOutlinePlus,
+} from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
+import { isLoggedIn } from '../helpers/authHelper';
+import CommentEditor from './CommentEditor';
+import ContentDetails from './ContentDetails';
+import HorizontalStack from './util/HorizontalStack';
+import { deleteComment, updateComment } from '../api/posts';
+import ContentUpdateEditor from './ContentUpdateEditor';
+import Markdown from './Markdown';
+import { MdCancel } from 'react-icons/md';
+import { BiReply, BiTrash } from 'react-icons/bi';
+import { BsReply, BsReplyFill } from 'react-icons/bs';
+import Moment from 'react-moment';
 
 const Comment = (props) => {
   const theme = useTheme();
@@ -32,7 +41,7 @@ const Comment = (props) => {
     if (isLoggedIn()) {
       setReplying(!replying);
     } else {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
@@ -65,7 +74,7 @@ const Comment = (props) => {
   };
 
   if (depth % 2 === 1) {
-    style.backgroundColor = "white";
+    style.backgroundColor = 'white';
   }
 
   return (
@@ -81,12 +90,19 @@ const Comment = (props) => {
         {props.profile ? (
           <Box>
             <Typography variant="h6">
-              <Link underline="hover" to={"/posts/" + comment.post._id}>
+              <Link
+                underline="hover"
+                to={'/posts/' + comment.post._id}
+              >
                 {comment.post.title}
               </Link>
             </Typography>
-            <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-              <Moment fromNow>{comment.createdAt}</Moment>{" "}
+            <Typography
+              variant="subtitle2"
+              color="text.secondary"
+              gutterBottom
+            >
+              <Moment fromNow>{comment.createdAt}</Moment>{' '}
               {comment.edited && <>(Edited)</>}
             </Typography>
           </Box>

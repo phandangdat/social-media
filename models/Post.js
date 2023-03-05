@@ -1,23 +1,23 @@
-const mongoose = require("mongoose");
-const filter = require("../util/filter");
-const PostLike = require("./PostLike");
+const mongoose = require('mongoose');
+const filter = require('../util/filter');
+const PostLike = require('./PostLike');
 
 const PostSchema = new mongoose.Schema(
   {
     poster: {
       type: mongoose.Types.ObjectId,
-      ref: "user",
+      ref: 'user',
       required: true,
     },
     title: {
       type: String,
       required: true,
-      maxLength: [80, "Must be no more than 80 characters"],
+      maxLength: [80, 'Must be no more than 80 characters'],
     },
     content: {
       type: String,
       required: true,
-      maxLength: [8000, "Must be no more than 8000 characters"],
+      maxLength: [8000, 'Must be no more than 8000 characters'],
     },
     likeCount: {
       type: Number,
@@ -32,10 +32,10 @@ const PostSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-PostSchema.pre("save", function (next) {
+PostSchema.pre('save', function (next) {
   if (this.title.length > 0) {
     this.title = filter.clean(this.title);
   }
@@ -47,9 +47,9 @@ PostSchema.pre("save", function (next) {
   next();
 });
 
-PostSchema.pre("remove", async function (next) {
+PostSchema.pre('remove', async function (next) {
   await PostLike.deleteMany({ postId: this._id });
   next();
 });
 
-module.exports = mongoose.model("post", PostSchema);
+module.exports = mongoose.model('post', PostSchema);

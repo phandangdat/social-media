@@ -1,12 +1,12 @@
-import { Card, Grid } from "@mui/material";
-import { Box, Container } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import Messages from "../Messages";
-import Navbar from "../Navbar";
-import UserMessengerEntries from "../UserMessengerEntries";
-import { getConversations } from "../../api/messages";
-import { isLoggedIn } from "../../helpers/authHelper";
-import { useLocation } from "react-router-dom";
+import { Card, Grid } from '@mui/material';
+import { Box, Container } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import Messages from '../Messages';
+import Navbar from '../Navbar';
+import UserMessengerEntries from '../UserMessengerEntries';
+import { getConversations } from '../../api/messages';
+import { isLoggedIn } from '../../helpers/authHelper';
+import { useLocation } from 'react-router-dom';
 
 const MessengerView = () => {
   const [conservant, setConservant] = useState(null);
@@ -52,8 +52,9 @@ const MessengerView = () => {
   useEffect(() => {
     updateDimensions();
 
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    window.addEventListener('resize', updateDimensions);
+    return () =>
+      window.removeEventListener('resize', updateDimensions);
   }, []);
 
   const updateDimensions = () => {
@@ -68,7 +69,7 @@ const MessengerView = () => {
         <Card sx={{ padding: 0 }}>
           <Grid
             container
-            sx={{ height: "calc(100vh - 110px)" }}
+            sx={{ height: 'calc(100vh - 110px)' }}
             alignItems="stretch"
           >
             {!mobile ? (
@@ -78,8 +79,8 @@ const MessengerView = () => {
                   xs={5}
                   sx={{
                     borderRight: 1,
-                    borderColor: "divider",
-                    height: "100%",
+                    borderColor: 'divider',
+                    height: '100%',
                   }}
                 >
                   <UserMessengerEntries
@@ -90,7 +91,7 @@ const MessengerView = () => {
                   />
                 </Grid>
 
-                <Grid item xs={7} sx={{ height: "100%" }}>
+                <Grid item xs={7} sx={{ height: '100%' }}>
                   <Messages
                     conservant={conservant}
                     conversations={conversations}
@@ -106,8 +107,8 @@ const MessengerView = () => {
                 xs={12}
                 sx={{
                   borderRight: 1,
-                  borderColor: "divider",
-                  height: "100%",
+                  borderColor: 'divider',
+                  height: '100%',
                 }}
               >
                 <UserMessengerEntries
@@ -116,7 +117,7 @@ const MessengerView = () => {
                   setConservant={setConservant}
                   loading={loading}
                 />
-                <Box sx={{ display: "none" }}>
+                <Box sx={{ display: 'none' }}>
                   <Messages
                     conservant={conservant}
                     conversations={conversations}
@@ -127,7 +128,7 @@ const MessengerView = () => {
                 </Box>
               </Grid>
             ) : (
-              <Grid item xs={12} sx={{ height: "100%" }}>
+              <Grid item xs={12} sx={{ height: '100%' }}>
                 <Messages
                   conservant={conservant}
                   conversations={conversations}

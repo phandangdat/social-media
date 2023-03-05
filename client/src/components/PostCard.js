@@ -5,27 +5,36 @@ import {
   Stack,
   Typography,
   useTheme,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useState } from "react";
-import { AiFillCheckCircle, AiFillEdit, AiFillMessage } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import { deletePost, likePost, unlikePost, updatePost } from "../api/posts";
-import { isLoggedIn } from "../helpers/authHelper";
-import ContentDetails from "./ContentDetails";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useState } from 'react';
+import {
+  AiFillCheckCircle,
+  AiFillEdit,
+  AiFillMessage,
+} from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+import {
+  deletePost,
+  likePost,
+  unlikePost,
+  updatePost,
+} from '../api/posts';
+import { isLoggedIn } from '../helpers/authHelper';
+import ContentDetails from './ContentDetails';
 
-import LikeBox from "./LikeBox";
-import PostContentBox from "./PostContentBox";
-import HorizontalStack from "./util/HorizontalStack";
+import LikeBox from './LikeBox';
+import PostContentBox from './PostContentBox';
+import HorizontalStack from './util/HorizontalStack';
 
-import {} from "react-icons/ai";
-import ContentUpdateEditor from "./ContentUpdateEditor";
-import Markdown from "./Markdown";
+import {} from 'react-icons/ai';
+import ContentUpdateEditor from './ContentUpdateEditor';
+import Markdown from './Markdown';
 
-import "./postCard.css";
-import { MdCancel } from "react-icons/md";
-import { BiTrash } from "react-icons/bi";
-import { BsReplyFill } from "react-icons/bs";
+import './postCard.css';
+import { MdCancel } from 'react-icons/md';
+import { BiTrash } from 'react-icons/bi';
+import { BsReplyFill } from 'react-icons/bs';
 
 const PostCard = (props) => {
   const { preview, removePost } = props;
@@ -44,7 +53,7 @@ const PostCard = (props) => {
   const [likeCount, setLikeCount] = useState(post.likeCount);
 
   let maxHeight = null;
-  if (preview === "primary") {
+  if (preview === 'primary') {
     maxHeight = 250;
   }
 
@@ -60,7 +69,7 @@ const PostCard = (props) => {
       if (preview) {
         removePost(post);
       } else {
-        navigate("/");
+        navigate('/');
       }
     }
   };
@@ -99,8 +108,8 @@ const PostCard = (props) => {
             alignItems="center"
             spacing={1}
             sx={{
-              backgroundColor: "grey.100",
-              width: "50px",
+              backgroundColor: 'grey.100',
+              width: '50px',
               padding: theme.spacing(1),
             }}
           >
@@ -110,18 +119,22 @@ const PostCard = (props) => {
               onLike={handleLike}
             />
           </Stack>
-          <PostContentBox clickable={preview} post={post} editing={editing}>
+          <PostContentBox
+            clickable={preview}
+            post={post}
+            editing={editing}
+          >
             <HorizontalStack justifyContent="space-between">
               <ContentDetails
                 username={post.poster.username}
                 createdAt={post.createdAt}
                 edited={post.edited}
-                preview={preview === "secondary"}
+                preview={preview === 'secondary'}
               />
               <Box>
                 {user &&
                   (isAuthor || user.isAdmin) &&
-                  preview !== "secondary" && (
+                  preview !== 'secondary' && (
                     <HorizontalStack>
                       <IconButton
                         disabled={loading}
@@ -140,7 +153,9 @@ const PostCard = (props) => {
                         onClick={handleDeletePost}
                       >
                         {confirm ? (
-                          <AiFillCheckCircle color={theme.palette.error.main} />
+                          <AiFillCheckCircle
+                            color={theme.palette.error.main}
+                          />
                         ) : (
                           <BiTrash color={theme.palette.error.main} />
                         )}
@@ -153,13 +168,13 @@ const PostCard = (props) => {
             <Typography
               variant="h5"
               gutterBottom
-              sx={{ overflow: "hidden", mt: 1, maxHeight: 125 }}
+              sx={{ overflow: 'hidden', mt: 1, maxHeight: 125 }}
               className="title"
             >
               {post.title}
             </Typography>
 
-            {preview !== "secondary" &&
+            {preview !== 'secondary' &&
               (editing ? (
                 <ContentUpdateEditor
                   handleSubmit={handleSubmit}
@@ -180,7 +195,7 @@ const PostCard = (props) => {
               <Typography
                 variant="subtitle2"
                 color="text.secondary"
-                sx={{ fontWeight: "bold" }}
+                sx={{ fontWeight: 'bold' }}
               >
                 {post.commentCount}
               </Typography>

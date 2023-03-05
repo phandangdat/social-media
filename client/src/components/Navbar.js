@@ -1,4 +1,4 @@
-import { useTheme } from "@emotion/react";
+import { useTheme } from '@emotion/react';
 import {
   Avatar,
   IconButton,
@@ -7,37 +7,38 @@ import {
   Typography,
   Button,
   InputAdornment,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import "react-icons/ai";
-import "react-icons/ri";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import 'react-icons/ai';
+import 'react-icons/ri';
 import {
   AiFillFileText,
   AiFillHome,
   AiFillMessage,
   AiOutlineSearch,
-} from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
-import { isLoggedIn, logoutUser } from "../helpers/authHelper";
-import UserAvatar from "./UserAvatar";
-import HorizontalStack from "./util/HorizontalStack";
-import { RiContrast2Line } from "react-icons/ri";
+} from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
+import { isLoggedIn, logoutUser } from '../helpers/authHelper';
+import UserAvatar from './UserAvatar';
+import HorizontalStack from './util/HorizontalStack';
+import { RiContrast2Line } from 'react-icons/ri';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const user = isLoggedIn();
   const theme = useTheme();
   const username = user && isLoggedIn().username;
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [searchIcon, setSearchIcon] = useState(false);
   const [width, setWindowWidth] = useState(0);
 
   useEffect(() => {
     updateDimensions();
 
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    window.addEventListener('resize', updateDimensions);
+    return () =>
+      window.removeEventListener('resize', updateDimensions);
   }, []);
 
   const mobile = width < 500;
@@ -50,7 +51,7 @@ const Navbar = () => {
 
   const handleLogout = async (e) => {
     logoutUser();
-    navigate("/login");
+    navigate('/login');
   };
 
   const handleChange = (e) => {
@@ -59,7 +60,7 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/search?" + new URLSearchParams({ search }));
+    navigate('/search?' + new URLSearchParams({ search }));
   };
 
   const handleSearchIcon = (e) => {
@@ -82,11 +83,11 @@ const Navbar = () => {
           <AiFillFileText
             size={33}
             color={theme.palette.primary.main}
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
           />
           <Typography
-            sx={{ display: mobile ? "none" : "block" }}
-            variant={navbarWidth ? "h6" : "h4"}
+            sx={{ display: mobile ? 'none' : 'block' }}
+            variant={navbarWidth ? 'h6' : 'h4'}
             mr={1}
             color={theme.palette.primary.main}
           >
@@ -115,25 +116,37 @@ const Navbar = () => {
             </IconButton>
           )}
 
-          <IconButton component={Link} to={"/"}>
+          <IconButton component={Link} to={'/'}>
             <AiFillHome />
           </IconButton>
           {user ? (
             <>
-              <IconButton component={Link} to={"/messenger"}>
+              <IconButton component={Link} to={'/messenger'}>
                 <AiFillMessage />
               </IconButton>
-              <IconButton component={Link} to={"/users/" + username}>
-                <UserAvatar width={30} height={30} username={user.username} />
+              <IconButton component={Link} to={'/users/' + username}>
+                <UserAvatar
+                  width={30}
+                  height={30}
+                  username={user.username}
+                />
               </IconButton>
               <Button onClick={handleLogout}>Logout</Button>
             </>
           ) : (
             <>
-              <Button variant="text" sx={{ minWidth: 80 }} href="/signup">
+              <Button
+                variant="text"
+                sx={{ minWidth: 80 }}
+                href="/signup"
+              >
                 Sign Up
               </Button>
-              <Button variant="text" sx={{ minWidth: 65 }} href="/login">
+              <Button
+                variant="text"
+                sx={{ minWidth: 65 }}
+                href="/login"
+              >
                 Login
               </Button>
             </>

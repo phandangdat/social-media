@@ -8,19 +8,23 @@ import {
   OutlinedInput,
   Stack,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useEffect, useRef, useState } from "react";
-import { AiFillBackward, AiFillCaretLeft, AiFillMessage } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { getMessages, sendMessage } from "../api/messages";
-import { isLoggedIn } from "../helpers/authHelper";
-import { socket } from "../helpers/socketHelper";
-import Loading from "./Loading";
-import Message from "./Message";
-import SendMessage from "./SendMessage";
-import UserAvatar from "./UserAvatar";
-import HorizontalStack from "./util/HorizontalStack";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  AiFillBackward,
+  AiFillCaretLeft,
+  AiFillMessage,
+} from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { getMessages, sendMessage } from '../api/messages';
+import { isLoggedIn } from '../helpers/authHelper';
+import { socket } from '../helpers/socketHelper';
+import Loading from './Loading';
+import Message from './Message';
+import SendMessage from './SendMessage';
+import UserAvatar from './UserAvatar';
+import HorizontalStack from './util/HorizontalStack';
 
 const Messages = (props) => {
   const messagesEndRef = useRef(null);
@@ -45,9 +49,9 @@ const Messages = (props) => {
   const setDirection = (messages) => {
     messages.forEach((message) => {
       if (message.sender._id === user.userId) {
-        message.direction = "from";
+        message.direction = 'from';
       } else {
-        message.direction = "to";
+        message.direction = 'to';
       }
     });
   };
@@ -89,7 +93,7 @@ const Messages = (props) => {
   };
 
   const handleSendMessage = async (content) => {
-    const newMessage = { direction: "from", content };
+    const newMessage = { direction: 'from', content };
     const newMessages = [newMessage, ...messages];
 
     if (conversation.new) {
@@ -97,7 +101,8 @@ const Messages = (props) => {
     }
 
     let newConversations = props.conversations.filter(
-      (conversationCompare) => conversation._id !== conversationCompare._id
+      (conversationCompare) =>
+        conversation._id !== conversationCompare._id,
     );
 
     newConversations.unshift(conversation);
@@ -109,19 +114,19 @@ const Messages = (props) => {
     await sendMessage(user, newMessage, conversation.recipient._id);
 
     socket.emit(
-      "send-message",
+      'send-message',
       conversation.recipient._id,
       user.username,
-      content
+      content,
     );
   };
 
   const handleReceiveMessage = (senderId, username, content) => {
-    const newMessage = { direction: "to", content };
+    const newMessage = { direction: 'to', content };
 
     const conversation = props.getConversation(
       conversationsRef.current,
-      senderId
+      senderId,
     );
 
     if (conversation) {
@@ -138,7 +143,8 @@ const Messages = (props) => {
       conversation.lastMessageAt = Date.now();
 
       let newConversations = conversationsRef.current.filter(
-        (conversationCompare) => conversation._id !== conversationCompare._id
+        (conversationCompare) =>
+          conversation._id !== conversationCompare._id,
       );
 
       newConversations.unshift(conversation);
@@ -152,14 +158,17 @@ const Messages = (props) => {
         messages: [newMessage],
         lastMessageAt: Date.now(),
       };
-      props.setConversations([newConversation, ...conversationsRef.current]);
+      props.setConversations([
+        newConversation,
+        ...conversationsRef.current,
+      ]);
     }
 
     scrollToBottom();
   };
 
   useEffect(() => {
-    socket.on("receive-message", handleReceiveMessage);
+    socket.on('receive-message', handleReceiveMessage);
   }, []);
 
   return props.conservant ? (
@@ -169,7 +178,7 @@ const Messages = (props) => {
           <HorizontalStack
             alignItems="center"
             spacing={2}
-            sx={{ px: 2, height: "60px" }}
+            sx={{ px: 2, height: '60px' }}
           >
             {props.mobile && (
               <IconButton
@@ -185,16 +194,20 @@ const Messages = (props) => {
               width={30}
             />
             <Typography>
-              <Link to={"/users/" + props.conservant.username}>
+              <Link to={'/users/' + props.conservant.username}>
                 <b>{props.conservant.username}</b>
               </Link>
             </Typography>
           </HorizontalStack>
           <Divider />
-          <Box sx={{ height: "calc(100vh - 240px)" }}>
-            <Box sx={{ height: "100%" }}>
+          <Box sx={{ height: 'calc(100vh - 240px)' }}>
+            <Box sx={{ height: '100%' }}>
               <Stack
-                sx={{ padding: 2, overflowY: "auto", maxHeight: "100%" }}
+                sx={{
+                  padding: 2,
+                  overflowY: 'auto',
+                  maxHeight: '100%',
+                }}
                 direction="column-reverse"
               >
                 <div ref={messagesEndRef} />
@@ -212,14 +225,14 @@ const Messages = (props) => {
           {scrollToBottom()}
         </>
       ) : (
-        <Stack sx={{ height: "100%" }} justifyContent="center">
+        <Stack sx={{ height: '100%' }} justifyContent="center">
           <Loading />
         </Stack>
       )}
     </>
   ) : (
     <Stack
-      sx={{ height: "100%" }}
+      sx={{ height: '100%' }}
       justifyContent="center"
       alignItems="center"
       spacing={2}

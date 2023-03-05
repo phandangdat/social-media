@@ -1,8 +1,13 @@
-import { useTheme } from "@emotion/react";
-import { autocompleteClasses, Box, Card, CardActionArea } from "@mui/material";
-import React from "react";
-import "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useTheme } from '@emotion/react';
+import {
+  autocompleteClasses,
+  Box,
+  Card,
+  CardActionArea,
+} from '@mui/material';
+import React from 'react';
+import 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const PostContentBox = (props) => {
   const { clickable, post, editing } = props;
@@ -15,15 +20,18 @@ const PostContentBox = (props) => {
         <Box
           sx={{
             padding: theme.spacing(2),
-            width: "92%",
-            "&:hover": { backgroundColor: "grey.50", cursor: "pointer" },
+            width: '92%',
+            '&:hover': {
+              backgroundColor: 'grey.50',
+              cursor: 'pointer',
+            },
           }}
-          onClick={() => navigate("/posts/" + post._id)}
+          onClick={() => navigate('/posts/' + post._id)}
         >
           {props.children}
         </Box>
       ) : (
-        <Box sx={{ padding: theme.spacing(2), width: "90%" }}>
+        <Box sx={{ padding: theme.spacing(2), width: '90%' }}>
           {props.children}
         </Box>
       )}

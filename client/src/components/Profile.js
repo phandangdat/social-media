@@ -1,4 +1,4 @@
-import { useTheme } from "@emotion/react";
+import { useTheme } from '@emotion/react';
 import {
   Avatar,
   Button,
@@ -6,16 +6,16 @@ import {
   Divider,
   Stack,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { AiFillEdit } from "react-icons/ai";
-import { isLoggedIn } from "../helpers/authHelper";
-import ContentUpdateEditor from "./ContentUpdateEditor";
-import Footer from "./Footer";
-import Loading from "./Loading";
-import UserAvatar from "./UserAvatar";
-import HorizontalStack from "./util/HorizontalStack";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import { AiFillEdit } from 'react-icons/ai';
+import { isLoggedIn } from '../helpers/authHelper';
+import ContentUpdateEditor from './ContentUpdateEditor';
+import Footer from './Footer';
+import Loading from './Loading';
+import UserAvatar from './UserAvatar';
+import HorizontalStack from './util/HorizontalStack';
 
 const Profile = (props) => {
   const [user, setUser] = useState(null);
@@ -34,7 +34,11 @@ const Profile = (props) => {
       {user ? (
         <Stack alignItems="center" spacing={2}>
           <Box my={1}>
-            <UserAvatar width={150} height={150} username={user.username} />
+            <UserAvatar
+              width={150}
+              height={150}
+              username={user.username}
+            />
           </Box>
 
           <Typography variant="h5">{user.username}</Typography>

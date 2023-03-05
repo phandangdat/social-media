@@ -1,18 +1,29 @@
-import { Button, Card, Stack, TextField, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { createComment } from "../api/posts";
-import { isLoggedIn } from "../helpers/authHelper";
-import ErrorAlert from "./ErrorAlert";
-import HorizontalStack from "./util/HorizontalStack";
+import {
+  Button,
+  Card,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { createComment } from '../api/posts';
+import { isLoggedIn } from '../helpers/authHelper';
+import ErrorAlert from './ErrorAlert';
+import HorizontalStack from './util/HorizontalStack';
 
-const CommentEditor = ({ label, comment, addComment, setReplying }) => {
+const CommentEditor = ({
+  label,
+  comment,
+  addComment,
+  setReplying,
+}) => {
   const [formData, setFormData] = useState({
-    content: "",
+    content: '',
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const params = useParams();
@@ -37,14 +48,14 @@ const CommentEditor = ({ label, comment, addComment, setReplying }) => {
     if (data.error) {
       setError(data.error);
     } else {
-      formData.content = "";
+      formData.content = '';
       setReplying && setReplying(false);
       addComment(data);
     }
   };
 
   const handleFocus = (e) => {
-    !isLoggedIn() && navigate("/login");
+    !isLoggedIn() && navigate('/login');
   };
 
   return (
@@ -68,7 +79,7 @@ const CommentEditor = ({ label, comment, addComment, setReplying }) => {
             required
             name="content"
             sx={{
-              backgroundColor: "white",
+              backgroundColor: 'white',
             }}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -82,7 +93,7 @@ const CommentEditor = ({ label, comment, addComment, setReplying }) => {
             fullWidth
             disabled={loading}
             sx={{
-              backgroundColor: "white",
+              backgroundColor: 'white',
               mt: 2,
             }}
           >

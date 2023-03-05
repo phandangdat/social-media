@@ -1,7 +1,7 @@
-const Conversation = require("../models/Conversation");
-const Message = require("../models/Message");
-const User = require("../models/User");
-const mongoose = require("mongoose");
+const Conversation = require('../models/Conversation');
+const Message = require('../models/Message');
+const User = require('../models/User');
+const mongoose = require('mongoose');
 
 const sendMessage = async (req, res) => {
   try {
@@ -11,7 +11,7 @@ const sendMessage = async (req, res) => {
     const recipient = await User.findById(recipientId);
 
     if (!recipient) {
-      throw new Error("Recipient not found");
+      throw new Error('Recipient not found');
     }
 
     let conversation = await Conversation.findOne({
@@ -50,14 +50,14 @@ const getMessages = async (req, res) => {
     const conversation = await Conversation.findById(conversationId);
 
     if (!conversation) {
-      throw new Error("Conversation not found");
+      throw new Error('Conversation not found');
     }
 
     const messages = await Message.find({
       conversation: conversation._id,
     })
-      .populate("sender", "-password")
-      .sort("-createdAt")
+      .populate('sender', '-password')
+      .sort('-createdAt')
       .limit(12);
 
     return res.json(messages);
@@ -76,8 +76,8 @@ const getConversations = async (req, res) => {
         $in: [userId],
       },
     })
-      .populate("recipients", "-password")
-      .sort("-updatedAt")
+      .populate('recipients', '-password')
+      .sort('-updatedAt')
       .lean();
 
     for (let i = 0; i < conversations.length; i++) {

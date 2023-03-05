@@ -1,10 +1,10 @@
-import { BASE_URL } from "../config";
+import { BASE_URL } from '../config';
 
 const getConversations = async (user) => {
   try {
-    const res = await fetch(BASE_URL + "api/messages", {
+    const res = await fetch(BASE_URL + 'api/messages', {
       headers: {
-        "x-access-token": user.token,
+        'x-access-token': user.token,
       },
     });
     return await res.json();
@@ -15,11 +15,14 @@ const getConversations = async (user) => {
 
 const getMessages = async (user, conversationId) => {
   try {
-    const res = await fetch(BASE_URL + "api/messages/" + conversationId, {
-      headers: {
-        "x-access-token": user.token,
+    const res = await fetch(
+      BASE_URL + 'api/messages/' + conversationId,
+      {
+        headers: {
+          'x-access-token': user.token,
+        },
       },
-    });
+    );
     return await res.json();
   } catch (err) {
     console.log(err);
@@ -28,15 +31,18 @@ const getMessages = async (user, conversationId) => {
 
 const sendMessage = async (user, message, recipientId) => {
   try {
-    const res = await fetch(BASE_URL + "api/messages/" + recipientId, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": user.token,
+    const res = await fetch(
+      BASE_URL + 'api/messages/' + recipientId,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': user.token,
+        },
+        body: JSON.stringify(message),
       },
-      body: JSON.stringify(message),
-    });
+    );
     return await res.json();
   } catch (err) {
     console.log(err);

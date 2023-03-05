@@ -6,25 +6,25 @@ import {
   Typography,
   Link,
   Alert,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useState } from "react";
-import { signup } from "../../api/users";
-import { loginUser } from "../../helpers/authHelper";
-import { useNavigate } from "react-router-dom";
-import Copyright from "../Copyright";
-import ErrorAlert from "../ErrorAlert";
-import { isLength, isEmail, contains } from "validator";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useState } from 'react';
+import { signup } from '../../api/users';
+import { loginUser } from '../../helpers/authHelper';
+import { useNavigate } from 'react-router-dom';
+import Copyright from '../Copyright';
+import ErrorAlert from '../ErrorAlert';
+import { isLength, isEmail, contains } from 'validator';
 
 const SignupView = () => {
   const navigate = useNavigate();
-  const [serverError, setServerError] = useState("");
+  const [serverError, setServerError] = useState('');
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+    username: '',
+    email: '',
+    password: '',
   });
 
   const handleChange = (e) => {
@@ -43,7 +43,7 @@ const SignupView = () => {
       setServerError(data.error);
     } else {
       loginUser(data);
-      navigate("/");
+      navigate('/');
     }
   };
 
@@ -51,19 +51,19 @@ const SignupView = () => {
     const errors = {};
 
     if (!isLength(formData.username, { min: 6, max: 30 })) {
-      errors.username = "Must be between 6 and 30 characters long";
+      errors.username = 'Must be between 6 and 30 characters long';
     }
 
-    if (contains(formData.username, " ")) {
-      errors.username = "Must contain only valid characters";
+    if (contains(formData.username, ' ')) {
+      errors.username = 'Must contain only valid characters';
     }
 
     if (!isLength(formData.password, { min: 8 })) {
-      errors.password = "Must be at least 8 characters long";
+      errors.password = 'Must be at least 8 characters long';
     }
 
     if (!isEmail(formData.email)) {
-      errors.email = "Must be a valid email address";
+      errors.email = 'Must be a valid email address';
     }
 
     setErrors(errors);
@@ -72,9 +72,13 @@ const SignupView = () => {
   };
 
   return (
-    <Container maxWidth={"xs"} sx={{ mt: { xs: 2, md: 6 } }}>
+    <Container maxWidth={'xs'} sx={{ mt: { xs: 2, md: 6 } }}>
       <Stack alignItems="center">
-        <Typography variant="h2" color="text.secondary" sx={{ mb: 6 }}>
+        <Typography
+          variant="h2"
+          color="text.secondary"
+          sx={{ mb: 6 }}
+        >
           <Link to="/" color="inherit" underline="none">
             PostIt
           </Link>
@@ -124,7 +128,12 @@ const SignupView = () => {
             helperText={errors.password}
           />
           <ErrorAlert error={serverError} />
-          <Button type="submit" fullWidth variant="contained" sx={{ my: 2 }}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ my: 2 }}
+          >
             Sign Up
           </Button>
         </Box>

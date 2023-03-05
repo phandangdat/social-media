@@ -5,18 +5,19 @@ import {
   ListItemButton,
   ListItemText,
   MenuItem,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React from "react";
-import UserAvatar from "./UserAvatar";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React from 'react';
+import UserAvatar from './UserAvatar';
 
-import moment from "moment";
+import moment from 'moment';
 
 const UserMessengerEntry = (props) => {
   const recipient = props.conversation.recipient;
   const username = recipient.username;
   const selected =
-    props.conservant && props.conservant.username === recipient.username;
+    props.conservant &&
+    props.conservant.username === recipient.username;
 
   const handleClick = () => {
     props.setConservant(recipient);
@@ -36,7 +37,9 @@ const UserMessengerEntry = (props) => {
         </ListItemAvatar>
         <ListItemText
           primary={username}
-          secondary={moment(props.conversation.lastMessageAt).fromNow()}
+          secondary={moment(
+            props.conversation.lastMessageAt,
+          ).fromNow()}
         />
       </MenuItem>
     </>

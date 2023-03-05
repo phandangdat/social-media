@@ -1,6 +1,6 @@
-import { io } from "socket.io-client";
-import { BASE_URL } from "../config";
-import { isLoggedIn } from "./authHelper";
+import { io } from 'socket.io-client';
+import { BASE_URL } from '../config';
+import { isLoggedIn } from './authHelper';
 
 export let socket;
 

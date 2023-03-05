@@ -1,9 +1,9 @@
-import { Box, Button, Stack, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button, Stack, TextField } from '@mui/material';
+import React, { useState } from 'react';
 
 const ContentUpdateEditor = (props) => {
   const [content, setContent] = useState(props.originalContent);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setContent(e.target.value);
@@ -34,7 +34,7 @@ const ContentUpdateEditor = (props) => {
           fullWidth
           margin="normal"
           name="content"
-          sx={{ backgroundColor: "white" }}
+          sx={{ backgroundColor: 'white' }}
           onChange={handleChange}
           error={error.length !== 0}
           helperText={error}
@@ -43,7 +43,7 @@ const ContentUpdateEditor = (props) => {
         <Button
           type="submit"
           variant="outlined"
-          sx={{ backgroundColor: "white", mt: 1 }}
+          sx={{ backgroundColor: 'white', mt: 1 }}
         >
           Update
         </Button>

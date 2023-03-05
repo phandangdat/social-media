@@ -1,10 +1,10 @@
-const User = require("../models/User");
-const Post = require("../models/Post");
-const PostLike = require("../models/PostLike");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const Follow = require("../models/Follow");
-const { default: mongoose } = require("mongoose");
+const User = require('../models/User');
+const Post = require('../models/Post');
+const PostLike = require('../models/PostLike');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const Follow = require('../models/Follow');
+const { default: mongoose } = require('mongoose');
 
 const getUserDict = (token, user) => {
   return {
@@ -27,7 +27,7 @@ const register = async (req, res) => {
     const { username, email, password } = req.body;
 
     if (!(username && email && password)) {
-      throw new Error("All input required");
+      throw new Error('All input required');
     }
 
     const normalizedEmail = email.toLowerCase();
@@ -39,7 +39,7 @@ const register = async (req, res) => {
     });
 
     if (existingUser) {
-      throw new Error("Email and username must be unique");
+      throw new Error('Email and username must be unique');
     }
 
     const user = await User.create({
@@ -61,7 +61,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!(email && password)) {
-      throw new Error("All input required");
+      throw new Error('All input required');
     }
 
     const normalizedEmail = email.toLowerCase();
@@ -69,13 +69,16 @@ const login = async (req, res) => {
     const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
-      throw new Error("Email or password incorrect");
+      throw new Error('Email or password incorrect');
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password,
+    );
 
     if (!isPasswordValid) {
-      throw new Error("Email or password incorrect");
+      throw new Error('Email or password incorrect');
     }
 
     const token = jwt.sign(buildToken(user), process.env.TOKEN_KEY);
@@ -95,7 +98,7 @@ const follow = async (req, res) => {
     const existingFollow = await Follow.find({ userId, followingId });
 
     if (existingFollow) {
-      throw new Error("Already following this user");
+      throw new Error('Already following this user');
     }
 
     const follow = await Follow.create({ userId, followingId });
@@ -113,10 +116,10 @@ const updateUser = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      throw new Error("User does not exist");
+      throw new Error('User does not exist');
     }
 
-    if (typeof biography == "string") {
+    if (typeof biography == 'string') {
       user.biography = biography;
     }
 
@@ -136,7 +139,7 @@ const unfollow = async (req, res) => {
     const existingFollow = await Follow.find({ userId, followingId });
 
     if (!existingFollow) {
-      throw new Error("Not already following user");
+      throw new Error('Not already following user');
     }
 
     await existingFollow.remove();
@@ -175,15 +178,15 @@ const getUser = async (req, res) => {
   try {
     const username = req.params.username;
 
-    const user = await User.findOne({ username }).select("-password");
+    const user = await User.findOne({ username }).select('-password');
 
     if (!user) {
-      throw new Error("User does not exist");
+      throw new Error('User does not exist');
     }
 
     const posts = await Post.find({ poster: user._id })
-      .populate("poster")
-      .sort("-createdAt");
+      .populate('poster')
+      .sort('-createdAt');
 
     let likeCount = 0;
 
@@ -210,7 +213,7 @@ const getRandomUsers = async (req, res) => {
   try {
     let { size } = req.query;
 
-    const users = await User.find().select("-password");
+    const users = await User.find().select('-password');
 
     const randomUsers = [];
 

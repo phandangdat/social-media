@@ -1,22 +1,22 @@
-import { Container, Stack } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import GoBack from "../GoBack";
-import GridLayout from "../GridLayout";
-import Loading from "../Loading";
-import Navbar from "../Navbar";
-import PostCard from "../PostCard";
-import Sidebar from "../Sidebar";
-import { useParams } from "react-router-dom";
-import { getPost } from "../../api/posts";
-import Comments from "../Comments";
-import ErrorAlert from "../ErrorAlert";
-import { isLoggedIn } from "../../helpers/authHelper";
+import { Container, Stack } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import GoBack from '../GoBack';
+import GridLayout from '../GridLayout';
+import Loading from '../Loading';
+import Navbar from '../Navbar';
+import PostCard from '../PostCard';
+import Sidebar from '../Sidebar';
+import { useParams } from 'react-router-dom';
+import { getPost } from '../../api/posts';
+import Comments from '../Comments';
+import ErrorAlert from '../ErrorAlert';
+import { isLoggedIn } from '../../helpers/authHelper';
 
 const PostView = () => {
   const params = useParams();
 
   const [post, setPost] = useState(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const user = isLoggedIn();
 

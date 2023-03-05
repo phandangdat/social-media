@@ -1,7 +1,7 @@
-const Comment = require("../models/Comment");
-const mongoose = require("mongoose");
-const Post = require("../models/Post");
-const paginate = require("../util/paginate");
+const Comment = require('../models/Comment');
+const mongoose = require('mongoose');
+const Post = require('../models/Post');
+const paginate = require('../util/paginate');
 const cooldown = new Set();
 
 const createComment = async (req, res) => {
@@ -12,12 +12,12 @@ const createComment = async (req, res) => {
     const post = await Post.findById(postId);
 
     if (!post) {
-      throw new Error("Post not found");
+      throw new Error('Post not found');
     }
 
     if (cooldown.has(userId)) {
       throw new Error(
-        "You are commenting too frequently. Please try again shortly."
+        'You are commenting too frequently. Please try again shortly.',
       );
     }
 
@@ -37,7 +37,10 @@ const createComment = async (req, res) => {
 
     await post.save();
 
-    await Comment.populate(comment, { path: "commenter", select: "-password" });
+    await Comment.populate(comment, {
+      path: 'commenter',
+      select: '-password',
+    });
 
     return res.json(comment);
   } catch (err) {
@@ -50,8 +53,8 @@ const getPostComments = async (req, res) => {
     const postId = req.params.id;
 
     const comments = await Comment.find({ post: postId })
-      .populate("commenter", "-password")
-      .sort("-createdAt");
+      .populate('commenter', '-password')
+      .sort('-createdAt');
 
     let commentParents = {};
     let rootComments = [];
@@ -83,12 +86,12 @@ const getUserComments = async (req, res) => {
 
     let { page, sortBy } = req.query;
 
-    if (!sortBy) sortBy = "-createdAt";
+    if (!sortBy) sortBy = '-createdAt';
     if (!page) page = 1;
 
     let comments = await Comment.find({ commenter: userId })
       .sort(sortBy)
-      .populate("post");
+      .populate('post');
 
     return res.json(comments);
   } catch (err) {
@@ -102,17 +105,17 @@ const updateComment = async (req, res) => {
     const { userId, content, isAdmin } = req.body;
 
     if (!content) {
-      throw new Error("All input required");
+      throw new Error('All input required');
     }
 
     const comment = await Comment.findById(commentId);
 
     if (!comment) {
-      throw new Error("Comment not found");
+      throw new Error('Comment not found');
     }
 
     if (comment.commenter != userId && !isAdmin) {
-      throw new Error("Not authorized to update comment");
+      throw new Error('Not authorized to update comment');
     }
 
     comment.content = content;
@@ -133,18 +136,20 @@ const deleteComment = async (req, res) => {
     const comment = await Comment.findById(commentId);
 
     if (!comment) {
-      throw new Error("Comment not found");
+      throw new Error('Comment not found');
     }
 
     if (comment.commenter != userId && !isAdmin) {
-      throw new Error("Not authorized to delete comment");
+      throw new Error('Not authorized to delete comment');
     }
 
     await comment.remove();
 
     const post = await Post.findById(comment.post);
 
-    post.commentCount = (await Comment.find({ post: post._id })).length;
+    post.commentCount = (
+      await Comment.find({ post: post._id })
+    ).length;
 
     await post.save();
 

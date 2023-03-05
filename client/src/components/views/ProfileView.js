@@ -1,29 +1,29 @@
-import { Card, Container, Stack, Tab, Tabs } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getUser, updateUser } from "../../api/users";
-import { isLoggedIn } from "../../helpers/authHelper";
-import CommentBrowser from "../CommentBrowser";
+import { Card, Container, Stack, Tab, Tabs } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getUser, updateUser } from '../../api/users';
+import { isLoggedIn } from '../../helpers/authHelper';
+import CommentBrowser from '../CommentBrowser';
 
-import ErrorAlert from "../ErrorAlert";
-import FindUsers from "../FindUsers";
-import Footer from "../Footer";
-import GoBack from "../GoBack";
-import GridLayout from "../GridLayout";
-import Loading from "../Loading";
-import MobileProfile from "../MobileProfile";
-import Navbar from "../Navbar";
-import PostBrowser from "../PostBrowser";
-import Profile from "../Profile";
-import ProfileTabs from "../ProfileTabs";
+import ErrorAlert from '../ErrorAlert';
+import FindUsers from '../FindUsers';
+import Footer from '../Footer';
+import GoBack from '../GoBack';
+import GridLayout from '../GridLayout';
+import Loading from '../Loading';
+import MobileProfile from '../MobileProfile';
+import Navbar from '../Navbar';
+import PostBrowser from '../PostBrowser';
+import Profile from '../Profile';
+import ProfileTabs from '../ProfileTabs';
 
 const ProfileView = () => {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
   const [editing, setEditing] = useState(false);
-  const [tab, setTab] = useState("posts");
+  const [tab, setTab] = useState('posts');
   const user = isLoggedIn();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const params = useParams();
   const navigate = useNavigate();
 
@@ -45,7 +45,10 @@ const ProfileView = () => {
 
     await updateUser(user, { biography: content });
 
-    setProfile({ ...profile, user: { ...profile.user, biography: content } });
+    setProfile({
+      ...profile,
+      user: { ...profile.user, biography: content },
+    });
     setEditing(false);
   };
 
@@ -54,7 +57,7 @@ const ProfileView = () => {
   };
 
   const handleMessage = () => {
-    navigate("/messenger", { state: { user: profile.user } });
+    navigate('/messenger', { state: { user: profile.user } });
   };
 
   useEffect(() => {
@@ -62,10 +65,10 @@ const ProfileView = () => {
   }, []);
 
   const validate = (content) => {
-    let error = "";
+    let error = '';
 
     if (content.length > 250) {
-      error = "Bio cannot be longer than 250 characters";
+      error = 'Bio cannot be longer than 250 characters';
     }
 
     return error;

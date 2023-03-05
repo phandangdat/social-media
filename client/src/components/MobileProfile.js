@@ -1,4 +1,4 @@
-import { useTheme } from "@emotion/react";
+import { useTheme } from '@emotion/react';
 import {
   Avatar,
   Button,
@@ -7,15 +7,15 @@ import {
   IconButton,
   Stack,
   Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { AiFillEdit } from "react-icons/ai";
-import { MdCancel } from "react-icons/md";
-import { isLoggedIn } from "../helpers/authHelper";
-import ContentUpdateEditor from "./ContentUpdateEditor";
-import UserAvatar from "./UserAvatar";
-import HorizontalStack from "./util/HorizontalStack";
+} from '@mui/material';
+import { Box } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import { AiFillEdit } from 'react-icons/ai';
+import { MdCancel } from 'react-icons/md';
+import { isLoggedIn } from '../helpers/authHelper';
+import ContentUpdateEditor from './ContentUpdateEditor';
+import UserAvatar from './UserAvatar';
+import HorizontalStack from './util/HorizontalStack';
 
 const MobileProfile = (props) => {
   const [user, setUser] = useState(null);
@@ -30,18 +30,22 @@ const MobileProfile = (props) => {
   }, [props.profile]);
 
   return (
-    <Card sx={{ display: { sm: "block", md: "none" }, mb: 2 }}>
+    <Card sx={{ display: { sm: 'block', md: 'none' }, mb: 2 }}>
       {user ? (
         <Stack spacing={2}>
           <HorizontalStack spacing={2} justifyContent="space-between">
             <HorizontalStack>
-              <UserAvatar width={50} height={50} username={user.username} />
+              <UserAvatar
+                width={50}
+                height={50}
+                username={user.username}
+              />
               <Typography variant="h6" textOverflow="ellipses">
                 {user.username}
               </Typography>
             </HorizontalStack>
 
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               <HorizontalStack spacing={3}>
                 <Stack alignItems="center">
                   <Typography>Likes</Typography>
@@ -50,7 +54,9 @@ const MobileProfile = (props) => {
                   </Typography>
                 </Stack>
                 <Stack alignItems="center">
-                  <Typography color="text.secondary">Posts</Typography>
+                  <Typography color="text.secondary">
+                    Posts
+                  </Typography>
                   <Typography color="text.secondary">
                     <b>{props.profile.posts.count}</b>
                   </Typography>
@@ -61,7 +67,10 @@ const MobileProfile = (props) => {
           <Divider />
           <Box>
             {currentUser && user._id === currentUser.userId && (
-              <IconButton onClick={props.handleEditing} sx={{ mr: 1 }}>
+              <IconButton
+                onClick={props.handleEditing}
+                sx={{ mr: 1 }}
+              >
                 {props.editing ? (
                   <MdCancel color={iconColor} />
                 ) : (
@@ -79,16 +88,21 @@ const MobileProfile = (props) => {
             ) : (
               <Typography variant="p">
                 <i>
-                  No bio yet{" "}
+                  No bio yet{' '}
                   {currentUser && user._id === currentUser.userId && (
-                    <span>- Tap on the edit icon to add your bio</span>
+                    <span>
+                      - Tap on the edit icon to add your bio
+                    </span>
                   )}
                 </i>
               </Typography>
             )}
             {currentUser && user._id !== currentUser.userId && (
               <Box sx={{ mt: 2 }}>
-                <Button variant="outlined" onClick={props.handleMessage}>
+                <Button
+                  variant="outlined"
+                  onClick={props.handleMessage}
+                >
                   Message
                 </Button>
               </Box>

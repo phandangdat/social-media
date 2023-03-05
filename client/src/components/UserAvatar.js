@@ -1,5 +1,5 @@
-import { Avatar } from "@mui/material";
-import React from "react";
+import { Avatar } from '@mui/material';
+import React from 'react';
 
 const UserAvatar = ({ username, height, width }) => {
   return (
@@ -7,9 +7,9 @@ const UserAvatar = ({ username, height, width }) => {
       sx={{
         height: height,
         width: width,
-        backgroundColor: "lightgray",
+        backgroundColor: 'lightgray',
       }}
-      src={"https://robohash.org/" + username}
+      src={'https://robohash.org/' + username}
     />
   );
 };

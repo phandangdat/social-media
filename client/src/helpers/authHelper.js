@@ -1,16 +1,16 @@
-import { initiateSocketConnection } from "./socketHelper";
+import { initiateSocketConnection } from './socketHelper';
 
 const isLoggedIn = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  return JSON.parse(localStorage.getItem('user'));
 };
 
 const loginUser = (user) => {
-  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem('user', JSON.stringify(user));
   initiateSocketConnection();
 };
 
 const logoutUser = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem('user');
   initiateSocketConnection();
 };
 

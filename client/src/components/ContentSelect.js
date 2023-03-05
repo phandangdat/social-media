@@ -1,9 +1,9 @@
-import { MenuItem, Select, Typography } from "@mui/material";
-import React, { useState } from "react";
-import HorizontalStack from "./util/HorizontalStack";
+import { MenuItem, Select, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import HorizontalStack from './util/HorizontalStack';
 
 const ContentSelect = () => {
-  const [content, setContent] = useState("post");
+  const [content, setContent] = useState('post');
 
   return (
     <HorizontalStack spacing={1}>
@@ -14,8 +14,8 @@ const ContentSelect = () => {
         sx={{ minWidth: 150 }}
         onChange={(e) => setContent(e.target.value)}
       >
-        <MenuItem value={"post"}>Posts</MenuItem>
-        <MenuItem value={"comment"}>Comments</MenuItem>
+        <MenuItem value={'post'}>Posts</MenuItem>
+        <MenuItem value={'comment'}>Comments</MenuItem>
       </Select>
     </HorizontalStack>
   );

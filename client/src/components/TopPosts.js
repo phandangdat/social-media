@@ -1,12 +1,12 @@
-import { Card, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { getPosts } from "../api/posts";
-import { isLoggedIn } from "../helpers/authHelper";
-import Loading from "./Loading";
-import PostCard from "./PostCard";
-import HorizontalStack from "./util/HorizontalStack";
-import "react-icons/md";
-import { MdLeaderboard } from "react-icons/md";
+import { Card, Stack, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { getPosts } from '../api/posts';
+import { isLoggedIn } from '../helpers/authHelper';
+import Loading from './Loading';
+import PostCard from './PostCard';
+import HorizontalStack from './util/HorizontalStack';
+import 'react-icons/md';
+import { MdLeaderboard } from 'react-icons/md';
 
 const TopPosts = () => {
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const TopPosts = () => {
   const user = isLoggedIn();
 
   const fetchPosts = async () => {
-    const query = { sortBy: "-likeCount" };
+    const query = { sortBy: '-likeCount' };
 
     const data = await getPosts(user && user.token, query);
 

@@ -1,14 +1,17 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
   try {
-    const token = req.headers["x-access-token"];
+    const token = req.headers['x-access-token'];
 
     if (!token) {
-      throw new Error("No token provided");
+      throw new Error('No token provided');
     }
 
-    const { userId, isAdmin } = jwt.decode(token, process.env.TOKEN_KEY);
+    const { userId, isAdmin } = jwt.decode(
+      token,
+      process.env.TOKEN_KEY,
+    );
 
     req.body = {
       ...req.body,
@@ -24,7 +27,7 @@ const verifyToken = (req, res, next) => {
 
 const optionallyVerifyToken = (req, res, next) => {
   try {
-    const token = req.headers["x-access-token"];
+    const token = req.headers['x-access-token'];
 
     if (!token) return next();
 

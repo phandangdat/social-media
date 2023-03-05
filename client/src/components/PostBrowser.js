@@ -1,23 +1,23 @@
-import { Button, Card, Link, Stack, Typography } from "@mui/material";
-import { alignProperty } from "@mui/material/styles/cssUtils";
-import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
-import { MdSettingsInputAntenna } from "react-icons/md";
-import { useLocation, useSearchParams } from "react-router-dom";
-import { getPosts, getUserLikedPosts } from "../api/posts";
-import { isLoggedIn } from "../helpers/authHelper";
-import CreatePost from "./CreatePost";
-import Loading from "./Loading";
-import PostCard from "./PostCard";
-import SortBySelect from "./SortBySelect";
-import HorizontalStack from "./util/HorizontalStack";
+import { Button, Card, Link, Stack, Typography } from '@mui/material';
+import { alignProperty } from '@mui/material/styles/cssUtils';
+import { Box } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import { MdSettingsInputAntenna } from 'react-icons/md';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { getPosts, getUserLikedPosts } from '../api/posts';
+import { isLoggedIn } from '../helpers/authHelper';
+import CreatePost from './CreatePost';
+import Loading from './Loading';
+import PostCard from './PostCard';
+import SortBySelect from './SortBySelect';
+import HorizontalStack from './util/HorizontalStack';
 
 const PostBrowser = (props) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [end, setEnd] = useState(false);
-  const [sortBy, setSortBy] = useState("-createdAt");
+  const [sortBy, setSortBy] = useState('-createdAt');
   const [count, setCount] = useState(0);
   const user = isLoggedIn();
 
@@ -25,7 +25,7 @@ const PostBrowser = (props) => {
   const [effect, setEffect] = useState(false);
 
   const searchExists =
-    search && search.get("search") && search.get("search").length > 0;
+    search && search.get('search') && search.get('search').length > 0;
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -39,16 +39,17 @@ const PostBrowser = (props) => {
 
     let data;
 
-    if (props.contentType === "posts") {
-      if (props.profileUser) query.author = props.profileUser.username;
-      if (searchExists) query.search = search.get("search");
+    if (props.contentType === 'posts') {
+      if (props.profileUser)
+        query.author = props.profileUser.username;
+      if (searchExists) query.search = search.get('search');
 
       data = await getPosts(user && user.token, query);
-    } else if (props.contentType === "liked") {
+    } else if (props.contentType === 'liked') {
       data = await getUserLikedPosts(
         props.profileUser._id,
         user && user.token,
-        query
+        query,
       );
     }
 
@@ -95,20 +96,20 @@ const PostBrowser = (props) => {
   const handleBackToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   const contentTypeSorts = {
     posts: {
-      "-createdAt": "Latest",
-      "-likeCount": "Likes",
-      "-commentCount": "Comments",
-      createdAt: "Earliest",
+      '-createdAt': 'Latest',
+      '-likeCount': 'Likes',
+      '-commentCount': 'Comments',
+      createdAt: 'Earliest',
     },
     liked: {
-      "-createdAt": "Latest",
-      createdAt: "Earliest",
+      '-createdAt': 'Latest',
+      createdAt: 'Earliest',
     },
   };
 
@@ -131,7 +132,7 @@ const PostBrowser = (props) => {
         {searchExists && (
           <Box>
             <Typography variant="h5" gutterBottom>
-              Showing results for "{search.get("search")}"
+              Showing results for "{search.get('search')}"
             </Typography>
             <Typography color="text.secondary" variant="span">
               {count} results found
@@ -151,14 +152,22 @@ const PostBrowser = (props) => {
         {loading && <Loading />}
         {end ? (
           <Stack py={5} alignItems="center">
-            <Typography variant="h5" color="text.secondary" gutterBottom>
+            <Typography
+              variant="h5"
+              color="text.secondary"
+              gutterBottom
+            >
               {posts.length > 0 ? (
                 <>All posts have been viewed</>
               ) : (
                 <>No posts available</>
               )}
             </Typography>
-            <Button variant="text" size="small" onClick={handleBackToTop}>
+            <Button
+              variant="text"
+              size="small"
+              onClick={handleBackToTop}
+            >
               Back to top
             </Button>
           </Stack>
@@ -170,7 +179,11 @@ const PostBrowser = (props) => {
               <Button onClick={fetchPosts} variant="contained">
                 Load more
               </Button>
-              <Button variant="text" size="small" onClick={handleBackToTop}>
+              <Button
+                variant="text"
+                size="small"
+                onClick={handleBackToTop}
+              >
                 Back to top
               </Button>
             </Stack>
