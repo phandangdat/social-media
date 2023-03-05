@@ -1,23 +1,23 @@
-import { Stack, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
-import Comment from './Comment';
-import Loading from './Loading';
-import { getComments } from '../api/posts';
-import { useParams } from 'react-router-dom';
-import CommentEditor from './CommentEditor';
+import { Stack, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import Comment from "./Comment";
+import Loading from "./Loading";
+import { getComments } from "../api/posts";
+import { useParams } from "react-router-dom";
+import CommentEditor from "./CommentEditor";
 
 const Comments = () => {
   const [comments, setComments] = useState(null);
   const [rerender, setRerender] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const params = useParams();
 
   const fetchComments = async () => {
     const data = await getComments(params);
     if (data.error) {
-      setError('Failed to fetch comments');
+      setError("Failed to fetch comments");
     } else {
       setComments(data);
     }

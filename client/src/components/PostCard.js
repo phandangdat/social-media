@@ -119,32 +119,34 @@ const PostCard = (props) => {
                 preview={preview === "secondary"}
               />
               <Box>
-                {user && (isAuthor || user.isAdmin) && preview !== "secondary" && (
-                  <HorizontalStack>
-                    <IconButton
-                      disabled={loading}
-                      size="small"
-                      onClick={handleEditPost}
-                    >
-                      {editing ? (
-                        <MdCancel color={iconColor} />
-                      ) : (
-                        <AiFillEdit color={iconColor} />
-                      )}
-                    </IconButton>
-                    <IconButton
-                      disabled={loading}
-                      size="small"
-                      onClick={handleDeletePost}
-                    >
-                      {confirm ? (
-                        <AiFillCheckCircle color={theme.palette.error.main} />
-                      ) : (
-                        <BiTrash color={theme.palette.error.main} />
-                      )}
-                    </IconButton>
-                  </HorizontalStack>
-                )}
+                {user &&
+                  (isAuthor || user.isAdmin) &&
+                  preview !== "secondary" && (
+                    <HorizontalStack>
+                      <IconButton
+                        disabled={loading}
+                        size="small"
+                        onClick={handleEditPost}
+                      >
+                        {editing ? (
+                          <MdCancel color={iconColor} />
+                        ) : (
+                          <AiFillEdit color={iconColor} />
+                        )}
+                      </IconButton>
+                      <IconButton
+                        disabled={loading}
+                        size="small"
+                        onClick={handleDeletePost}
+                      >
+                        {confirm ? (
+                          <AiFillCheckCircle color={theme.palette.error.main} />
+                        ) : (
+                          <BiTrash color={theme.palette.error.main} />
+                        )}
+                      </IconButton>
+                    </HorizontalStack>
+                  )}
               </Box>
             </HorizontalStack>
 

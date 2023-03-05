@@ -91,7 +91,7 @@ const Navbar = () => {
             color={theme.palette.primary.main}
           >
             {/* <Link to="/" color="inherit"> */}
-              PostIt
+            PostIt
             {/* </Link> */}
           </Typography>
         </HorizontalStack>
@@ -123,7 +123,7 @@ const Navbar = () => {
               <IconButton component={Link} to={"/messenger"}>
                 <AiFillMessage />
               </IconButton>
-              <IconButton component={Link}  to={"/users/" + username}>
+              <IconButton component={Link} to={"/users/" + username}>
                 <UserAvatar width={30} height={30} username={user.username} />
               </IconButton>
               <Button onClick={handleLogout}>Logout</Button>
