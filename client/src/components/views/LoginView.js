@@ -1,7 +1,9 @@
 import {
-  Button, Container, Stack,
+  Button,
+  Container,
+  Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
@@ -10,6 +12,7 @@ import { login } from '../../api/users';
 import { loginUser } from '../../helpers/authHelper';
 import Copyright from '../Copyright';
 import ErrorAlert from '../ErrorAlert';
+import Logo from '../Logo';
 
 const LoginView = () => {
   const navigate = useNavigate();
@@ -40,15 +43,9 @@ const LoginView = () => {
   return (
     <Container maxWidth={'xs'} sx={{ mt: 6 }}>
       <Stack alignItems="center">
-        <Typography
-          variant="h2"
-          color="text.secondary"
-          sx={{ mb: 6 }}
-        >
-          <Link to="/" color="inherit" underline="none">
-            PostIt
-          </Link>
-        </Typography>
+        <Link to="/" color="inherit" underline="none">
+          <Logo sx={{ fontSize: '70px', mb: 2 }} />
+        </Link>
         <Typography variant="h5" gutterBottom>
           Login
         </Typography>

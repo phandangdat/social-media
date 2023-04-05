@@ -6,7 +6,7 @@ const Copyright = () => {
   return (
     <Typography variant="subtitle1" color="text.secondary">
       Copyright © 2023{' '}
-      <Link to="/" color="inherit">
+      <Link to="/" style={{ color: 'white' }}>
         PostIt
       </Link>
     </Typography>

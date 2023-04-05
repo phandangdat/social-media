@@ -1,22 +1,23 @@
 import { useTheme } from '@emotion/react';
 import {
-  Button, IconButton,
+  Button,
+  IconButton,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import 'react-icons/ai';
 import {
-  AiFillFileText,
   AiFillHome,
   AiFillMessage,
-  AiOutlineSearch
+  AiOutlineSearch,
 } from 'react-icons/ai';
 import 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import { isLoggedIn, logoutUser } from '../helpers/authHelper';
+import Logo from './Logo';
 import UserAvatar from './UserAvatar';
 import HorizontalStack from './util/HorizontalStack';
 
@@ -76,20 +77,24 @@ const Navbar = () => {
         spacing={!mobile ? 2 : 0}
       >
         <HorizontalStack>
-          <AiFillFileText
-            size={33}
-            color={theme.palette.primary.main}
-            onClick={() => navigate('/')}
-          />
           <Typography
             sx={{ display: mobile ? 'none' : 'block' }}
             variant={navbarWidth ? 'h6' : 'h4'}
             mr={1}
             color={theme.palette.primary.main}
           >
-            {/* <Link to="/" color="inherit"> */}
-            PostIt
-            {/* </Link> */}
+            <Link
+              to="/"
+              style={{
+                display: 'flex',
+                textDecoration: 'none',
+                color: 'white',
+                fontWeight: 'bold',
+              }}
+            >
+              <Logo sx={{ fontSize: '40px' }} />
+              ostIt
+            </Link>
           </Typography>
         </HorizontalStack>
 

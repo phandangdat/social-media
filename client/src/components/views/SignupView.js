@@ -1,17 +1,19 @@
 import {
   Button,
-  Container, Link, Stack,
+  Container,
+  Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { contains, isEmail, isLength } from 'validator';
 import { signup } from '../../api/users';
 import { loginUser } from '../../helpers/authHelper';
 import Copyright from '../Copyright';
 import ErrorAlert from '../ErrorAlert';
+import Logo from '../Logo';
 
 const SignupView = () => {
   const navigate = useNavigate();
@@ -71,15 +73,9 @@ const SignupView = () => {
   return (
     <Container maxWidth={'xs'} sx={{ mt: { xs: 2, md: 6 } }}>
       <Stack alignItems="center">
-        <Typography
-          variant="h2"
-          color="text.secondary"
-          sx={{ mb: 6 }}
-        >
-          <Link to="/" color="inherit" underline="none">
-            PostIt
-          </Link>
-        </Typography>
+        <Link to="/" color="inherit" underline="none">
+          <Logo sx={{ fontSize: '70px', mb: 2 }} />
+        </Link>
         <Typography variant="h5" gutterBottom>
           Sign Up
         </Typography>
