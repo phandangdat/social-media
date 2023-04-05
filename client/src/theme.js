@@ -1,6 +1,18 @@
 import { createTheme } from '@mui/material';
 
 const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#0072e5',
+    },
+    background: {
+      default: '#0A1929',
+    },
+  },
+  shape: {
+    borderRadius: 12,
+  },
   components: {
     MuiCard: {
       defaultProps: {
@@ -18,6 +30,20 @@ const theme = createTheme({
     MuiContainer: {
       defaultProps: {
         maxWidth: 'md',
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          background: '#001e3c',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 18,
+        },
       },
     },
   },
