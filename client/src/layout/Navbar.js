@@ -2,6 +2,13 @@ import { useTheme } from '@emotion/react';
 import {
   Button,
   IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Popover,
   Stack,
   TextField,
   Typography,
@@ -17,6 +24,7 @@ import {
   AiFillMessage,
   AiOutlineSearch,
 } from 'react-icons/ai';
+import { MdLogout } from 'react-icons/md';
 import 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -24,7 +32,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const user = isLoggedIn();
   const theme = useTheme();
-  const username = user && isLoggedIn().username;
   const [search, setSearch] = useState('');
   const [searchIcon, setSearchIcon] = useState(false);
   const [width, setWindowWidth] = useState(0);
@@ -62,6 +69,19 @@ const Navbar = () => {
   const handleSearchIcon = (e) => {
     setSearchIcon(!searchIcon);
   };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <Stack mb={2}>
@@ -124,14 +144,62 @@ const Navbar = () => {
               <IconButton component={Link} to={'/messenger'}>
                 <AiFillMessage />
               </IconButton>
-              <IconButton component={Link} to={'/users/' + username}>
+              <IconButton
+                aria-describedby={id}
+                variant="contained"
+                onClick={handleClick}
+              >
                 <UserAvatar
                   width={30}
                   height={30}
                   username={user.username}
                 />
               </IconButton>
-              <Button onClick={handleLogout}>Logout</Button>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <List
+                  sx={{
+                    bgcolor: 'background.paper',
+                    minWidth: '180px',
+                  }}
+                >
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      component={Link}
+                      to={`/users/${user.username}`}
+                    >
+                      <ListItemAvatar>
+                        <UserAvatar
+                          width={30}
+                          height={30}
+                          username={user.username}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText primary={user.username} />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton onClick={handleLogout}>
+                      <ListItemIcon sx={{ fontSize: '25px' }}>
+                        <MdLogout />
+                      </ListItemIcon>
+                      <ListItemText primary="Logout" />
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </Popover>
             </>
           ) : (
             <>
