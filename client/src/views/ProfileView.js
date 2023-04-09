@@ -1,20 +1,21 @@
 import { Container, Stack } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { getUser, updateUser } from 'api/users';
+import {
+  CommentBrowser,
+  ErrorAlert,
+  FindUsers,
+  Loading,
+  MobileProfile,
+  PostBrowser,
+  Profile,
+  ProfileTabs,
+} from 'components';
+import { isLoggedIn } from 'helpers/authHelper';
+import Footer from 'layout/Footer';
+import GridLayout from 'layout/GridLayout';
+import Navbar from 'layout/Navbar';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getUser, updateUser } from '../../api/users';
-import { isLoggedIn } from '../../helpers/authHelper';
-import CommentBrowser from '../CommentBrowser';
-
-import ErrorAlert from '../ErrorAlert';
-import FindUsers from '../FindUsers';
-import Footer from '../Footer';
-import GridLayout from '../GridLayout';
-import Loading from '../Loading';
-import MobileProfile from '../MobileProfile';
-import Navbar from '../Navbar';
-import PostBrowser from '../PostBrowser';
-import Profile from '../Profile';
-import ProfileTabs from '../ProfileTabs';
 
 const ProfileView = () => {
   const [loading, setLoading] = useState(true);

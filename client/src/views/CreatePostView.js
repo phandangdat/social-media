@@ -1,16 +1,14 @@
 import { Container } from '@mui/material';
-import React from 'react';
-import GoBack from '../GoBack';
-import GridLayout from '../GridLayout';
-import Navbar from '../Navbar';
-import PostEditor from '../PostEditor';
-import Sidebar from '../Sidebar';
+import { Goback, PostEditor } from 'components';
+import GridLayout from 'layout/GridLayout';
+import Navbar from 'layout/Navbar';
+import Sidebar from 'layout/Sidebar';
 
 const CreatePostView = () => {
   return (
     <Container>
       <Navbar />
-      <GoBack />
+      <Goback />
       <GridLayout left={<PostEditor />} right={<Sidebar />} />
     </Container>
   );

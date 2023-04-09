@@ -6,13 +6,11 @@ import {
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import { login } from 'api/users';
+import { Copyright, ErrorAlert, Logo } from 'components';
+import { loginUser } from 'helpers/authHelper';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from '../../api/users';
-import { loginUser } from '../../helpers/authHelper';
-import Copyright from '../Copyright';
-import ErrorAlert from '../ErrorAlert';
-import Logo from '../Logo';
 
 const LoginView = () => {
   const navigate = useNavigate();

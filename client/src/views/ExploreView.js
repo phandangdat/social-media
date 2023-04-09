@@ -1,11 +1,8 @@
-import {
-  Container
-} from '@mui/material';
-import React from 'react';
-import GridLayout from '../GridLayout';
-import Navbar from '../Navbar';
-import PostBrowser from '../PostBrowser';
-import Sidebar from '../Sidebar';
+import { Container } from '@mui/material';
+import { PostBrowser } from 'components';
+import GridLayout from 'layout/GridLayout';
+import Navbar from 'layout/Navbar';
+import Sidebar from 'layout/Sidebar';
 
 const ExploreView = () => {
   return (

@@ -1,8 +1,6 @@
 import { Stack } from '@mui/material';
-import React from 'react';
-import FindUsers from './FindUsers';
+import { FindUsers, TopPosts } from 'components';
 import Footer from './Footer';
-import TopPosts from './TopPosts';
 
 const Sidebar = () => {
   return (

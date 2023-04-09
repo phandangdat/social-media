@@ -7,7 +7,10 @@ import {
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import { Logo, UserAvatar } from 'components';
+import HorizontalStack from 'components/util/HorizontalStack';
+import { isLoggedIn, logoutUser } from 'helpers/authHelper';
+import { useEffect, useState } from 'react';
 import 'react-icons/ai';
 import {
   AiFillHome,
@@ -16,10 +19,6 @@ import {
 } from 'react-icons/ai';
 import 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
-import { isLoggedIn, logoutUser } from '../helpers/authHelper';
-import Logo from './Logo';
-import UserAvatar from './UserAvatar';
-import HorizontalStack from './util/HorizontalStack';
 
 const Navbar = () => {
   const navigate = useNavigate();

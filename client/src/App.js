@@ -10,16 +10,16 @@ import 'react-router-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import theme from './theme';
 
-import PrivateRoute from './components/PrivateRoute';
-import CreatePostView from './components/views/CreatePostView';
-import ExploreView from './components/views/ExploreView';
-import LoginView from './components/views/LoginView';
-import MessengerView from './components/views/MessengerView';
-import PostView from './components/views/PostView';
-import ProfileView from './components/views/ProfileView';
-import SearchView from './components/views/SearchView';
-import SignupView from './components/views/SignupView';
 import { initiateSocketConnection } from './helpers/socketHelper';
+import PrivateRoute from './layout/PrivateRoute';
+import CreatePostView from './views/CreatePostView';
+import ExploreView from './views/ExploreView';
+import LoginView from './views/LoginView';
+import MessengerView from './views/MessengerView';
+import PostView from './views/PostView';
+import ProfileView from './views/ProfileView';
+import SearchView from './views/SearchView';
+import SignupView from './views/SignupView';
 
 function App() {
   initiateSocketConnection();
