@@ -1,6 +1,7 @@
 import { useTheme } from '@emotion/react';
 import {
   Button,
+  Collapse,
   IconButton,
   List,
   ListItem,
@@ -17,6 +18,7 @@ import { Box } from '@mui/system';
 import { Logo, UserAvatar } from 'components';
 import HorizontalStack from 'components/util/HorizontalStack';
 import { isLoggedIn, logoutUser } from 'helpers/authHelper';
+import { useGlobal } from 'hooks';
 import { useEffect, useState } from 'react';
 import 'react-icons/ai';
 import {
@@ -24,7 +26,13 @@ import {
   AiFillMessage,
   AiOutlineSearch,
 } from 'react-icons/ai';
-import { MdLogout } from 'react-icons/md';
+import {
+  MdBrightnessMedium,
+  MdExpandLess,
+  MdExpandMore,
+  MdLogout,
+  MdSettings,
+} from 'react-icons/md';
 import 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -34,7 +42,12 @@ const Navbar = () => {
   const theme = useTheme();
   const [search, setSearch] = useState('');
   const [searchIcon, setSearchIcon] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [width, setWindowWidth] = useState(0);
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  const { darkTheme, handleChangeTheme } = useGlobal();
+  const [openSubMenu, setOpenSubMenu] = useState(false);
 
   useEffect(() => {
     updateDimensions();
@@ -70,8 +83,6 @@ const Navbar = () => {
     setSearchIcon(!searchIcon);
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -80,8 +91,9 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const handleToggleSubMenu = () => {
+    setOpenSubMenu(!openSubMenu);
+  };
 
   return (
     <Stack mb={2}>
@@ -107,7 +119,7 @@ const Navbar = () => {
               style={{
                 display: 'flex',
                 textDecoration: 'none',
-                color: 'white',
+                color: darkTheme ? 'white' : '#3b88c3',
                 fontWeight: 'bold',
               }}
             >
@@ -190,6 +202,36 @@ const Navbar = () => {
                       <ListItemText primary={user.username} />
                     </ListItemButton>
                   </ListItem>
+                  <ListItemButton onClick={handleToggleSubMenu}>
+                    <ListItemIcon sx={{ fontSize: '25px' }}>
+                      <MdSettings />
+                    </ListItemIcon>
+                    <ListItemText primary="Setting" />
+                    {openSubMenu ? (
+                      <MdExpandLess />
+                    ) : (
+                      <MdExpandMore />
+                    )}
+                  </ListItemButton>
+                  <Collapse
+                    in={openSubMenu}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <List component="div" disablePadding>
+                      <ListItemButton
+                        sx={{ pl: 4 }}
+                        onClick={handleChangeTheme}
+                      >
+                        <ListItemIcon>
+                          <MdBrightnessMedium />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={darkTheme ? 'Light' : 'Dark'}
+                        />
+                      </ListItemButton>
+                    </List>
+                  </Collapse>
                   <ListItem disablePadding>
                     <ListItemButton onClick={handleLogout}>
                       <ListItemIcon sx={{ fontSize: '25px' }}>
@@ -206,14 +248,14 @@ const Navbar = () => {
               <Button
                 variant="text"
                 sx={{ minWidth: 80 }}
-                href="/signup"
+                onClick={() => navigate('/signup')}
               >
                 Sign Up
               </Button>
               <Button
                 variant="text"
                 sx={{ minWidth: 65 }}
-                href="/login"
+                onClick={() => navigate('/login')}
               >
                 Login
               </Button>

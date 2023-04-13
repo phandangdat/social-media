@@ -1,15 +1,12 @@
 import '@mui/material';
 import { CssBaseline } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
+import { GlobalProvider } from 'context';
 import 'react-icons';
 import 'react-icons/bi';
 import 'react-icons/bs';
 import 'react-icons/md';
 import 'react-router-dom';
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import theme from './theme';
-
 import { initiateSocketConnection } from './helpers/socketHelper';
 import PrivateRoute from './layout/PrivateRoute';
 import CreatePostView from './views/CreatePostView';
@@ -25,7 +22,7 @@ function App() {
   initiateSocketConnection();
 
   return (
-    <ThemeProvider theme={theme}>
+    <GlobalProvider>
       <BrowserRouter>
         <CssBaseline />
         <Routes>
@@ -53,7 +50,7 @@ function App() {
           <Route path="/signup" element={<SignupView />} />
         </Routes>
       </BrowserRouter>
-    </ThemeProvider>
+    </GlobalProvider>
   );
 }
 

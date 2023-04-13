@@ -1,12 +1,13 @@
 import {
   Button,
   Card,
+  Link,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPost } from '../api/posts';
 import { isLoggedIn } from '../helpers/authHelper';
@@ -69,9 +70,9 @@ const PostEditor = () => {
         )}
 
         <Typography>
-          <a href="https://commonmark.org/help/" target="_blank">
+          <Link href="https://commonmark.org/help/" target="_blank">
             Markdown Help
-          </a>
+          </Link>
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit}>
