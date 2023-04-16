@@ -1,6 +1,7 @@
 import { Button, Card, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getPosts, getUserLikedPosts } from '../api/posts';
 import { isLoggedIn } from '../helpers/authHelper';
@@ -18,7 +19,7 @@ const PostBrowser = (props) => {
   const [sortBy, setSortBy] = useState('-createdAt');
   const [count, setCount] = useState(0);
   const user = isLoggedIn();
-
+  const { translate } = useGlobal();
   const [search] = useSearchParams();
   const [effect, setEffect] = useState(false);
 
@@ -100,14 +101,14 @@ const PostBrowser = (props) => {
 
   const contentTypeSorts = {
     posts: {
-      '-createdAt': 'Latest',
+      '-createdAt': translate('latest'),
       '-likeCount': 'Likes',
-      '-commentCount': 'Comments',
-      createdAt: 'Earliest',
+      '-commentCount': translate('comments'),
+      createdAt: translate('earliest'),
     },
     liked: {
-      '-createdAt': 'Latest',
-      createdAt: 'Earliest',
+      '-createdAt': translate('latest'),
+      createdAt: translate('earliest'),
     },
   };
 
@@ -130,10 +131,11 @@ const PostBrowser = (props) => {
         {searchExists && (
           <Box>
             <Typography variant="h5" gutterBottom>
-              Showing results for "{search.get('search')}"
+              {translate('showingResultsFor')} "{search.get('search')}
+              "
             </Typography>
             <Typography color="text.secondary" variant="span">
-              {count} results found
+              {count} {translate('resultsFound')}
             </Typography>
           </Box>
         )}
@@ -156,9 +158,9 @@ const PostBrowser = (props) => {
               gutterBottom
             >
               {posts.length > 0 ? (
-                <>All posts have been viewed</>
+                <>{translate('allPostsHaveBeenViewed')}</>
               ) : (
-                <>No posts available</>
+                <>{translate('noPostsAvailable')}</>
               )}
             </Typography>
             <Button
@@ -166,7 +168,7 @@ const PostBrowser = (props) => {
               size="small"
               onClick={handleBackToTop}
             >
-              Back to top
+              {translate('backToTop')}
             </Button>
           </Stack>
         ) : (
@@ -182,7 +184,7 @@ const PostBrowser = (props) => {
                 size="small"
                 onClick={handleBackToTop}
               >
-                Back to top
+                {translate('backToTop')}
               </Button>
             </Stack>
           )

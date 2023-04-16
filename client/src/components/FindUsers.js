@@ -3,9 +3,10 @@ import {
   Divider,
   IconButton,
   Stack,
-  Typography
+  Typography,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useEffect, useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdRefresh } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -17,6 +18,7 @@ import HorizontalStack from './util/HorizontalStack';
 const FindUsers = () => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState(null);
+  const { translate } = useGlobal();
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -39,7 +41,7 @@ const FindUsers = () => {
         <HorizontalStack justifyContent="space-between">
           <HorizontalStack>
             <AiOutlineUser />
-            <Typography>Find Others</Typography>
+            <Typography>{translate('findOrther')}</Typography>
           </HorizontalStack>
           <IconButton
             sx={{ padding: 0 }}
@@ -69,7 +71,9 @@ const FindUsers = () => {
                 />
                 <Typography>{user.username}</Typography>
               </HorizontalStack>
-              <Link to={'/users/' + user.username}>View</Link>
+              <Link to={'/users/' + user.username}>
+                {translate('view')}
+              </Link>
             </HorizontalStack>
           ))
         )}

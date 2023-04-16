@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
+import { useGlobal } from 'hooks';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPost } from '../api/posts';
@@ -18,7 +19,7 @@ import HorizontalStack from './util/HorizontalStack';
 const PostEditor = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
+  const { translate } = useGlobal();
   const [formData, setFormData] = useState({
     title: '',
     content: '',
@@ -64,7 +65,8 @@ const PostEditor = () => {
               username={user.username}
             />
             <Typography variant="h5">
-              What would you like to post today {user.username}?
+              {translate('whatWouldYouLikeToPostToday') + ' '}
+              {user.username}?
             </Typography>
           </HorizontalStack>
         )}
@@ -78,7 +80,7 @@ const PostEditor = () => {
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
             fullWidth
-            label="Title"
+            label={translate('title')}
             required
             name="title"
             margin="normal"
@@ -88,7 +90,7 @@ const PostEditor = () => {
           />
           <TextField
             fullWidth
-            label="Content"
+            label={translate('content')}
             multiline
             rows={10}
             name="content"
@@ -108,7 +110,11 @@ const PostEditor = () => {
               mt: 2,
             }}
           >
-            {loading ? <>Submitting</> : <>Submit</>}
+            {loading ? (
+              <>{translate('submittingPost')}</>
+            ) : (
+              <>{translate('submitPost')}</>
+            )}
           </Button>
         </Box>
       </Stack>

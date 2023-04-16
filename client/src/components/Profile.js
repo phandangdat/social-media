@@ -1,11 +1,8 @@
 import { useTheme } from '@emotion/react';
-import {
-  Button,
-  Card, Stack,
-  Typography
-} from '@mui/material';
+import { Button, Card, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useEffect, useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
 import { isLoggedIn } from '../helpers/authHelper';
 import ContentUpdateEditor from './ContentUpdateEditor';
@@ -18,6 +15,7 @@ const Profile = (props) => {
   const currentUser = isLoggedIn();
   const theme = useTheme();
   const iconColor = theme.palette.primary.main;
+  const { translate } = useGlobal();
 
   useEffect(() => {
     if (props.profile) {
@@ -54,7 +52,7 @@ const Profile = (props) => {
             </Typography>
           ) : (
             <Typography variant="p">
-              <i>No bio yet</i>
+              <i>{translate('noBioYet')}</i>
             </Typography>
           )}
 
@@ -64,7 +62,11 @@ const Profile = (props) => {
                 startIcon={<AiFillEdit color={iconColor} />}
                 onClick={props.handleEditing}
               >
-                {props.editing ? <>Cancel</> : <>Edit bio</>}
+                {props.editing ? (
+                  <>{translate('cancel')}</>
+                ) : (
+                  <>{translate('editBio')}</>
+                )}
               </Button>
             </Box>
           )}

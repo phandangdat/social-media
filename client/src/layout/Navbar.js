@@ -30,6 +30,7 @@ import {
   MdBrightnessMedium,
   MdExpandLess,
   MdExpandMore,
+  MdLanguage,
   MdLogout,
   MdSettings,
 } from 'react-icons/md';
@@ -46,7 +47,13 @@ const Navbar = () => {
   const [width, setWindowWidth] = useState(0);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-  const { darkTheme, handleChangeTheme } = useGlobal();
+  const {
+    darkTheme,
+    handleChangeTheme,
+    english,
+    handleChangeLocale,
+    translate,
+  } = useGlobal();
   const [openSubMenu, setOpenSubMenu] = useState(false);
 
   useEffect(() => {
@@ -108,32 +115,34 @@ const Navbar = () => {
         spacing={!mobile ? 2 : 0}
       >
         <HorizontalStack>
-          <Typography
-            sx={{ display: mobile ? 'none' : 'block' }}
-            variant={navbarWidth ? 'h6' : 'h4'}
-            mr={1}
-            color={theme.palette.primary.main}
+          <Link
+            to="/"
+            style={{
+              display: 'flex',
+              textDecoration: 'none',
+            }}
           >
-            <Link
-              to="/"
-              style={{
-                display: 'flex',
-                textDecoration: 'none',
-                color: darkTheme ? 'white' : '#3b88c3',
+            <Logo sx={{ fontSize: '40px' }} />
+            <Typography
+              sx={{
+                display: mobile ? 'none' : 'block',
                 fontWeight: 'bold',
+                color: darkTheme ? 'white' : '#3b88c3',
               }}
+              variant={navbarWidth ? 'h6' : 'h4'}
+              mr={1}
+              color={theme.palette.primary.main}
             >
-              <Logo sx={{ fontSize: '40px' }} />
               ostIt
-            </Link>
-          </Typography>
+            </Typography>
+          </Link>
         </HorizontalStack>
 
         {!navbarWidth && (
           <Box component="form" onSubmit={handleSubmit}>
             <TextField
               size="small"
-              label="Search for posts..."
+              label={translate('searchForPosts')}
               sx={{ flexGrow: 1, maxWidth: 300 }}
               onChange={handleChange}
               value={search}
@@ -206,7 +215,7 @@ const Navbar = () => {
                     <ListItemIcon sx={{ fontSize: '25px' }}>
                       <MdSettings />
                     </ListItemIcon>
-                    <ListItemText primary="Setting" />
+                    <ListItemText primary={translate('settings')} />
                     {openSubMenu ? (
                       <MdExpandLess />
                     ) : (
@@ -230,6 +239,17 @@ const Navbar = () => {
                           primary={darkTheme ? 'Light' : 'Dark'}
                         />
                       </ListItemButton>
+                      <ListItemButton
+                        sx={{ pl: 4 }}
+                        onClick={handleChangeLocale}
+                      >
+                        <ListItemIcon>
+                          <MdLanguage />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={english ? 'Vietnamese' : 'English'}
+                        />
+                      </ListItemButton>
                     </List>
                   </Collapse>
                   <ListItem disablePadding>
@@ -237,7 +257,7 @@ const Navbar = () => {
                       <ListItemIcon sx={{ fontSize: '25px' }}>
                         <MdLogout />
                       </ListItemIcon>
-                      <ListItemText primary="Logout" />
+                      <ListItemText primary={translate('logout')} />
                     </ListItemButton>
                   </ListItem>
                 </List>
@@ -267,7 +287,7 @@ const Navbar = () => {
         <Box component="form" onSubmit={handleSubmit} mt={2}>
           <TextField
             size="small"
-            label="Search for posts..."
+            label={translate('searchForPosts')}
             fullWidth
             onChange={handleChange}
             value={search}

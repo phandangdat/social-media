@@ -1,7 +1,7 @@
 import { Button, Card, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useEffect, useState } from 'react';
 import { getUserComments } from '../api/posts';
-import { isLoggedIn } from '../helpers/authHelper';
 import Comment from './Comment';
 import Loading from './Loading';
 import SortBySelect from './SortBySelect';
@@ -12,7 +12,7 @@ const CommentBrowser = (props) => {
   const [page, setPage] = useState(0);
   const [end, setEnd] = useState(false);
   const [sortBy, setSortBy] = useState('-createdAt');
-  const user = isLoggedIn();
+  const { translate } = useGlobal();
 
   const fetchComments = async () => {
     setLoading(true);
@@ -55,8 +55,8 @@ const CommentBrowser = (props) => {
   };
 
   const sorts = {
-    '-createdAt': 'Latest',
-    createdAt: 'Earliest',
+    '-createdAt': translate('latest'),
+    createdAt: translate('earliest'),
   };
 
   return (
@@ -86,7 +86,7 @@ const CommentBrowser = (props) => {
               {comments.length > 0 ? (
                 <>All comments have been viewed</>
               ) : (
-                <>No comments available</>
+                <>{translate('noCommentsAvailable')}</>
               )}
             </Typography>
             <Button
@@ -94,7 +94,7 @@ const CommentBrowser = (props) => {
               size="small"
               onClick={handleBackToTop}
             >
-              Back to top
+              {translate('backToTop')}
             </Button>
           </Stack>
         </>

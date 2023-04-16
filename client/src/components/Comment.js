@@ -1,6 +1,7 @@
 import { IconButton, Typography, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useState } from 'react';
 import {
   AiFillEdit,
   AiOutlineLine,
@@ -31,6 +32,7 @@ const Comment = (props) => {
   const user = isLoggedIn();
   const isAuthor = user && user.userId === comment.commenter._id;
   const navigate = useNavigate();
+  const { translate } = useGlobal();
 
   const handleSetReplying = () => {
     if (isLoggedIn()) {
@@ -178,7 +180,9 @@ const Comment = (props) => {
                   comment={comment}
                   addComment={addComment}
                   setReplying={setReplying}
-                  label="What are your thoughts on this comment?"
+                  label={translate(
+                    'whatAreYourThoughtsOnThisComment',
+                  )}
                 />
               </Box>
             )}

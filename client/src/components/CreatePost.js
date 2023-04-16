@@ -1,10 +1,12 @@
 import { Button } from '@mui/material';
-import React from 'react';
+import { useGlobal } from 'hooks';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
   const navigate = useNavigate();
+  const { translate } = useGlobal();
+
   return (
     <Button
       variant="outlined"
@@ -16,7 +18,7 @@ const CreatePost = () => {
       }}
     >
       <AiOutlinePlus style={{ flexShrink: 0 }} />
-      <span>New Post</span>
+      <span>{translate('newPost')}</span>
     </Button>
   );
 };

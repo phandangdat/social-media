@@ -1,5 +1,5 @@
 import { Box, Divider, List, Stack, Typography } from '@mui/material';
-import React from 'react';
+import { useGlobal } from 'hooks';
 import { AiFillMessage } from 'react-icons/ai';
 import 'react-icons/bi';
 import { BiSad } from 'react-icons/bi';
@@ -8,6 +8,8 @@ import UserMessengerEntry from './UserMessengerEntry';
 import HorizontalStack from './util/HorizontalStack';
 
 const UserMessengerEntries = (props) => {
+  const { translate } = useGlobal();
+
   return !props.loading ? (
     <>
       {props.conversations.length > 0 ? (
@@ -53,10 +55,13 @@ const UserMessengerEntries = (props) => {
           textAlign="center"
         >
           <BiSad size={60} />
-          <Typography variant="h5">No Conversations</Typography>
+          <Typography variant="h5">
+            {translate('noConversations')}
+          </Typography>
           <Typography color="text.secondary" sx={{ maxWidth: '70%' }}>
-            Click 'Message' on another user's profile to start a
-            conversation
+            {translate(
+              'clickMessageOnAnotherUserProfileToStartAConversation',
+            )}
           </Typography>
         </Stack>
       )}

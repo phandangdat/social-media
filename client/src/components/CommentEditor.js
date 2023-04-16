@@ -6,7 +6,8 @@ import {
   Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { createComment } from '../api/posts';
 import { isLoggedIn } from '../helpers/authHelper';
@@ -22,7 +23,7 @@ const CommentEditor = ({
   const [formData, setFormData] = useState({
     content: '',
   });
-
+  const { translate } = useGlobal();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -63,7 +64,11 @@ const CommentEditor = ({
       <Stack spacing={2}>
         <HorizontalStack justifyContent="space-between">
           <Typography variant="h5">
-            {comment ? <>Reply</> : <>Comment</>}
+            {comment ? (
+              <>{translate('reply')}</>
+            ) : (
+              <>{translate('comment')}</>
+            )}
           </Typography>
           <Link to="https://commonmark.org/help/" target="_blank">
             Markdown Help
@@ -78,9 +83,6 @@ const CommentEditor = ({
             rows={5}
             required
             name="content"
-            sx={{
-              backgroundColor: 'white',
-            }}
             onChange={handleChange}
             onFocus={handleFocus}
             value={formData.content}
@@ -97,7 +99,11 @@ const CommentEditor = ({
               mt: 2,
             }}
           >
-            {loading ? <div>Submitting</div> : <div>Submit</div>}
+            {loading ? (
+              <div>{translate('submittingComment')}</div>
+            ) : (
+              <div>{translate('submitComment')}</div>
+            )}
           </Button>
         </Box>
       </Stack>

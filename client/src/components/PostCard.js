@@ -3,21 +3,21 @@ import {
   IconButton,
   Stack,
   Typography,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   AiFillCheckCircle,
   AiFillEdit,
-  AiFillMessage
+  AiFillMessage,
 } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import {
   deletePost,
   likePost,
   unlikePost,
-  updatePost
+  updatePost,
 } from '../api/posts';
 import { isLoggedIn } from '../helpers/authHelper';
 import ContentDetails from './ContentDetails';
@@ -26,10 +26,11 @@ import LikeBox from './LikeBox';
 import PostContentBox from './PostContentBox';
 import HorizontalStack from './util/HorizontalStack';
 
-import { } from 'react-icons/ai';
+import {} from 'react-icons/ai';
 import ContentUpdateEditor from './ContentUpdateEditor';
 import Markdown from './Markdown';
 
+import { useGlobal } from 'hooks';
 import { BiTrash } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
 import './postCard.css';
@@ -41,7 +42,7 @@ const PostCard = (props) => {
   const navigate = useNavigate();
   const user = isLoggedIn();
   const isAuthor = user && user.username === postData.poster.username;
-
+  const { darkTheme } = useGlobal();
   const theme = useTheme();
   const iconColor = theme.palette.primary.main;
 
@@ -106,7 +107,7 @@ const PostCard = (props) => {
             alignItems="center"
             spacing={1}
             sx={{
-              backgroundColor: 'grey.100',
+              backgroundColor: darkTheme ? '#011a32' : 'grey.100',
               width: '50px',
               padding: theme.spacing(1),
             }}

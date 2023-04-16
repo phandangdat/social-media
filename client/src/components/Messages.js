@@ -1,13 +1,13 @@
 import {
-  Divider, IconButton, Stack,
-  Typography
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  AiFillCaretLeft,
-  AiFillMessage
-} from 'react-icons/ai';
+import { useGlobal } from 'hooks';
+import { useEffect, useRef, useState } from 'react';
+import { AiFillCaretLeft, AiFillMessage } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { getMessages, sendMessage } from '../api/messages';
 import { isLoggedIn } from '../helpers/authHelper';
@@ -23,7 +23,7 @@ const Messages = (props) => {
   const user = isLoggedIn();
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const { translate } = useGlobal();
   const conversationsRef = useRef(props.conversations);
   const conservantRef = useRef(props.conservant);
   const messagesRef = useRef(messages);
@@ -232,7 +232,7 @@ const Messages = (props) => {
       <AiFillMessage size={80} />
       <Typography variant="h5">PostIt Messenger</Typography>
       <Typography color="text.secondary">
-        Privately message other users on PostIt
+        {translate('privatelyMessageOtherUsersOnPostIt')}
       </Typography>
     </Stack>
   );

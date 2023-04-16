@@ -1,6 +1,7 @@
 import { Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getComments } from '../api/posts';
 import Comment from './Comment';
@@ -13,6 +14,7 @@ const Comments = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const params = useParams();
+  const { translate } = useGlobal();
 
   const fetchComments = async () => {
     const data = await getComments(params);
@@ -98,7 +100,7 @@ const Comments = () => {
     <Stack spacing={2}>
       <CommentEditor
         addComment={addComment}
-        label="What are your thoughts on this post?"
+        label={translate('whatAreYourThoughtsOnThisPost')}
       />
 
       {comments.length > 0 ? (
@@ -128,10 +130,10 @@ const Comments = () => {
               color="text.secondary"
               gutterBottom
             >
-              No comments yet...
+              {translate('noCommentsYet')}
             </Typography>
             <Typography variant="body" color="text.secondary">
-              Be the first one to comment!
+              {translate('beTheFirstOneToComment')}
             </Typography>
           </Box>
         </Box>

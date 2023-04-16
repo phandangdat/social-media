@@ -1,9 +1,11 @@
 import { Box, Button, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useState } from 'react';
 
 const ContentUpdateEditor = (props) => {
   const [content, setContent] = useState(props.originalContent);
   const [error, setError] = useState('');
+  const { translate } = useGlobal();
 
   const handleChange = (e) => {
     setContent(e.target.value);
@@ -45,7 +47,7 @@ const ContentUpdateEditor = (props) => {
           variant="outlined"
           sx={{ backgroundColor: 'white', mt: 1 }}
         >
-          Update
+          {translate('update')}
         </Button>
       </Stack>
     </Box>

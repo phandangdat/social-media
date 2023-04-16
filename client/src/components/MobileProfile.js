@@ -5,10 +5,11 @@ import {
   Divider,
   IconButton,
   Stack,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import { useGlobal } from 'hooks';
+import { useEffect, useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
 import { MdCancel } from 'react-icons/md';
 import { isLoggedIn } from '../helpers/authHelper';
@@ -21,6 +22,7 @@ const MobileProfile = (props) => {
   const currentUser = isLoggedIn();
   const theme = useTheme();
   const iconColor = theme.palette.primary.main;
+  const { translate } = useGlobal();
 
   useEffect(() => {
     if (props.profile) {
@@ -54,7 +56,7 @@ const MobileProfile = (props) => {
                 </Stack>
                 <Stack alignItems="center">
                   <Typography color="text.secondary">
-                    Posts
+                    {translate('posts')}
                   </Typography>
                   <Typography color="text.secondary">
                     <b>{props.profile.posts.count}</b>
@@ -87,10 +89,10 @@ const MobileProfile = (props) => {
             ) : (
               <Typography variant="p">
                 <i>
-                  No bio yet{' '}
+                  {translate('noBioYet')}{' '}
                   {currentUser && user._id === currentUser.userId && (
                     <span>
-                      - Tap on the edit icon to add your bio
+                      - {translate('tapOnTheEditIconToAddYourBio')}
                     </span>
                   )}
                 </i>
