@@ -1,5 +1,5 @@
 import { Card, useTheme } from '@mui/material';
-import React from 'react';
+import { useGlobal } from 'hooks';
 import UserAvatar from './UserAvatar';
 import HorizontalStack from './util/HorizontalStack';
 
@@ -7,6 +7,7 @@ const Message = (props) => {
   const username = props.conservant.username;
   const message = props.message;
   const theme = useTheme();
+  const { darkTheme } = useGlobal();
 
   let styles = {};
   if (message.direction === 'to') {
@@ -15,7 +16,7 @@ const Message = (props) => {
     };
   } else if (message.direction === 'from') {
     styles = {
-      messageColor: theme.palette.grey['100'],
+      messageColor: darkTheme ? '#001e3c' : theme.palette.grey['100'],
       justifyContent: 'flex-end',
     };
   }

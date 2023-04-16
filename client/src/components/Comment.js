@@ -32,7 +32,7 @@ const Comment = (props) => {
   const user = isLoggedIn();
   const isAuthor = user && user.userId === comment.commenter._id;
   const navigate = useNavigate();
-  const { translate } = useGlobal();
+  const { translate, darkTheme } = useGlobal();
 
   const handleSetReplying = () => {
     if (isLoggedIn()) {
@@ -64,7 +64,7 @@ const Comment = (props) => {
   };
 
   let style = {
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: darkTheme ? '#001e3c' : theme.palette.grey[100],
     borderRadius: 1.5,
     mb: theme.spacing(2),
     padding: theme.spacing(0),

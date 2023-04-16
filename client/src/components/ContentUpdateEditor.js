@@ -5,7 +5,7 @@ import { useState } from 'react';
 const ContentUpdateEditor = (props) => {
   const [content, setContent] = useState(props.originalContent);
   const [error, setError] = useState('');
-  const { translate } = useGlobal();
+  const { translate, darkTheme } = useGlobal();
 
   const handleChange = (e) => {
     setContent(e.target.value);
@@ -36,7 +36,7 @@ const ContentUpdateEditor = (props) => {
           fullWidth
           margin="normal"
           name="content"
-          sx={{ backgroundColor: 'white' }}
+          sx={{ backgroundColor: !darkTheme && 'white' }}
           onChange={handleChange}
           error={error.length !== 0}
           helperText={error}
