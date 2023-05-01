@@ -1,11 +1,12 @@
 import { Typography } from '@mui/material';
-import React from 'react';
+import { useGlobal } from 'hooks';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import UserAvatar from './UserAvatar';
 import HorizontalStack from './util/HorizontalStack';
 
 const ContentDetails = ({ username, createdAt, edited, preview }) => {
+  const { translate } = useGlobal();
   return (
     <HorizontalStack sx={{}}>
       <UserAvatar width={30} height={30} username={username} />
@@ -28,7 +29,7 @@ const ContentDetails = ({ username, createdAt, edited, preview }) => {
           <>
             {' '}
             · <Moment fromNow>{createdAt}</Moment>{' '}
-            {edited && <>(Edited)</>}
+            {edited && <>{translate('edited')}</>}
           </>
         )}
       </Typography>

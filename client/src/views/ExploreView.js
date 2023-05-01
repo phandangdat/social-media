@@ -6,7 +6,7 @@ import Sidebar from 'layout/Sidebar';
 
 const ExploreView = () => {
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Navbar />
       <GridLayout
         left={<PostBrowser createPost contentType="posts" />}

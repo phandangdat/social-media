@@ -78,11 +78,12 @@ const Profile = (props) => {
           )}
 
           <HorizontalStack>
-            <Typography color="text.secondary">
-              Likes <b>{props.profile.posts.likeCount}</b>
+            <Typography color="text.seconary">
+              {translate('likes')}:
+              <b>{props.profile.posts.likeCount}</b>
             </Typography>
             <Typography color="text.secondary">
-              Posts <b>{props.profile.posts.count}</b>
+              {translate('posts')}: <b>{props.profile.posts.count}</b>
             </Typography>
           </HorizontalStack>
         </Stack>

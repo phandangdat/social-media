@@ -33,7 +33,7 @@ const PostView = () => {
   }, [params.id]);
 
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Navbar />
       <GoBack />
       <GridLayout

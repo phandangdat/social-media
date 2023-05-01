@@ -9,7 +9,7 @@ export const dark = {
     },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 8,
   },
   components: {
     MuiCard: {

@@ -3,6 +3,7 @@ import {
   Button,
   Collapse,
   IconButton,
+  InputAdornment,
   List,
   ListItem,
   ListItemAvatar,
@@ -32,6 +33,7 @@ import {
   MdExpandMore,
   MdLanguage,
   MdLogout,
+  MdOutlineSearch,
   MdSettings,
 } from 'react-icons/md';
 import 'react-icons/ri';
@@ -64,7 +66,8 @@ const Navbar = () => {
       window.removeEventListener('resize', updateDimensions);
   }, []);
 
-  const mobile = width < 500;
+  const mobile = width < 650;
+  const tablet = width < 1000;
   const navbarWidth = width < 600;
 
   const updateDimensions = () => {
@@ -143,7 +146,18 @@ const Navbar = () => {
             <TextField
               size="small"
               label={translate('searchForPosts')}
-              sx={{ flexGrow: 1, maxWidth: 300 }}
+              sx={{
+                flexGrow: 1,
+                maxWidth: tablet ? 300 : 600,
+                width: 300,
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <MdOutlineSearch />
+                  </InputAdornment>
+                ),
+              }}
               onChange={handleChange}
               value={search}
             />

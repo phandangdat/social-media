@@ -6,7 +6,7 @@ import Sidebar from 'layout/Sidebar';
 
 const SearchView = () => {
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Navbar />
       <GridLayout
         left={

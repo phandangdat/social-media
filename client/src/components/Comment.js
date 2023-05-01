@@ -70,7 +70,7 @@ const Comment = (props) => {
     padding: theme.spacing(0),
   };
 
-  if (depth % 2 === 1) {
+  if (depth % 2 === 1 && !darkTheme) {
     style.backgroundColor = 'white';
   }
 
@@ -100,7 +100,7 @@ const Comment = (props) => {
               gutterBottom
             >
               <Moment fromNow>{comment.createdAt}</Moment>{' '}
-              {comment.edited && <>(Edited)</>}
+              {comment.edited && <>{translate('edited')}</>}
             </Typography>
           </Box>
         ) : (
@@ -125,17 +125,19 @@ const Comment = (props) => {
             </HorizontalStack>
             {!minimised && (
               <HorizontalStack spacing={1}>
-                <IconButton
-                  variant="text"
-                  size="small"
-                  onClick={handleSetReplying}
-                >
-                  {!replying ? (
-                    <BsReplyFill color={iconColor} />
-                  ) : (
-                    <MdCancel color={iconColor} />
-                  )}
-                </IconButton>
+                {!(depth % 2 >= 1) && (
+                  <IconButton
+                    variant="text"
+                    size="small"
+                    onClick={handleSetReplying}
+                  >
+                    {!replying ? (
+                      <BsReplyFill color={iconColor} />
+                    ) : (
+                      <MdCancel color={iconColor} />
+                    )}
+                  </IconButton>
+                )}
                 {user && (isAuthor || user.isAdmin) && (
                   <HorizontalStack spacing={1}>
                     <IconButton

@@ -1,4 +1,4 @@
-import { Card, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useGlobal } from 'hooks';
 import { useEffect, useState } from 'react';
 import 'react-icons/md';
@@ -39,12 +39,10 @@ const TopPosts = () => {
 
   return (
     <Stack spacing={2}>
-      <Card>
-        <HorizontalStack>
-          <MdLeaderboard />
-          <Typography>{translate('topPosts')}</Typography>
-        </HorizontalStack>
-      </Card>
+      <HorizontalStack>
+        <MdLeaderboard />
+        <Typography>{translate('topPosts')}</Typography>
+      </HorizontalStack>
       {!loading ? (
         posts &&
         posts.map((post) => (

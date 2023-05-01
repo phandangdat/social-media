@@ -21,7 +21,7 @@ const UserMessengerEntries = (props) => {
           >
             <AiFillMessage size={30} />
             <Typography>
-              <b>Your Conversations</b>
+              <b>{translate('yourConversations')}</b>
             </Typography>
           </HorizontalStack>
           <Divider />

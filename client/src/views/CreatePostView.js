@@ -6,7 +6,7 @@ import Sidebar from 'layout/Sidebar';
 
 const CreatePostView = () => {
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Navbar />
       <Goback />
       <GridLayout left={<PostEditor />} right={<Sidebar />} />

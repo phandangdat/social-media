@@ -1,10 +1,11 @@
 import { Card, Tab, Tabs } from '@mui/material';
-import React from 'react';
+import { useGlobal } from 'hooks';
 
 const ProfileTabs = (props) => {
   const handleChange = (e, newValue) => {
     props.setTab(newValue);
   };
+  const { translate } = useGlobal();
 
   return (
     <Card sx={{ padding: 0 }}>
@@ -13,9 +14,9 @@ const ProfileTabs = (props) => {
         onChange={handleChange}
         variant="scrollable"
       >
-        <Tab label="Posts" value="posts" />
-        <Tab label="Liked" value="liked" />
-        <Tab label="Comments" value="comments" />
+        <Tab label={translate('posts')} value="posts" />
+        <Tab label={translate('liked')} value="liked" />
+        <Tab label={translate('commented')} value="comments" />
       </Tabs>
     </Card>
   );

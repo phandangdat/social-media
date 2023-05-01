@@ -7,6 +7,7 @@ export const locales = {
     sortBy: 'Sort by',
     latest: 'Latest',
     earliest: 'Earliest',
+    likes: 'Likes',
     comments: 'Comments',
     topPosts: 'Top posts',
     noPostsAvailable: 'No posts available',
@@ -46,6 +47,10 @@ export const locales = {
       "Click 'Message' on another user's profile to start a conversation",
     privatelyMessageOtherUsersOnPostIt:
       'Privately message other users on PostIt',
+    liked: 'Liked',
+    commented: 'commented',
+    yourConversations: 'Your conversations',
+    edited: 'Edited',
   },
   vn: {
     searchForPosts: 'Tìm kiếm bài viết...',
@@ -55,8 +60,9 @@ export const locales = {
     sortBy: 'Sắp xếp',
     latest: 'Muộn nhất',
     earliest: 'Sớm nhất',
+    likes: 'Lượt thích',
     comments: 'Bình luận',
-    topPosts: 'Top bài viết',
+    topPosts: 'BXH bài viết',
     noPostsAvailable: 'Không có bài viết nào',
     allPostsHaveBeenViewed: 'Tất cả bài viết đã được xem',
     backToTop: 'Về đầu trang',
@@ -92,5 +98,9 @@ export const locales = {
       "Nhấp vào 'Tin nhắn' trên hồ sơ của người dùng khác để bắt đầu cuộc trò chuyện",
     privatelyMessageOtherUsersOnPostIt:
       'Tin nhắn riêng tư với người dùng khác trên PostIt',
+    liked: 'Đã Thích',
+    commented: 'Đã bình luận',
+    yourConversations: 'Tin nhắn của bạn',
+    edited: 'Đã chỉnh sửa',
   },
 };

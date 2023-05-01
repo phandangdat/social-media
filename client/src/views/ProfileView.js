@@ -18,7 +18,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ProfileView = () => {
-  const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
   const [editing, setEditing] = useState(false);
   const [tab, setTab] = useState('posts');
@@ -28,9 +27,7 @@ const ProfileView = () => {
   const navigate = useNavigate();
 
   const fetchUser = async () => {
-    setLoading(true);
     const data = await getUser(params);
-    setLoading(false);
     if (data.error) {
       setError(data.error);
     } else {
@@ -96,7 +93,7 @@ const ProfileView = () => {
   }
 
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Navbar />
 
       <GridLayout

@@ -102,7 +102,7 @@ const PostBrowser = (props) => {
   const contentTypeSorts = {
     posts: {
       '-createdAt': translate('latest'),
-      '-likeCount': 'Likes',
+      '-likeCount': translate('likes'),
       '-commentCount': translate('comments'),
       createdAt: translate('earliest'),
     },

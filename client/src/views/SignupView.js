@@ -69,7 +69,7 @@ const SignupView = () => {
   };
 
   return (
-    <Container maxWidth={'xs'} sx={{ mt: { xs: 2, md: 6 } }}>
+    <Container maxWidth="xs" sx={{ mt: { xs: 2, md: 6 } }}>
       <Stack alignItems="center">
         <Link to="/" color="inherit" underline="none">
           <Logo sx={{ fontSize: '70px', mb: 2 }} />
