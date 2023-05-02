@@ -30,6 +30,7 @@ const PostView = () => {
 
   useEffect(() => {
     fetchPost();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   return (

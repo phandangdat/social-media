@@ -10,6 +10,7 @@ import {
   CommentBrowser,
   ErrorAlert,
   FindUsers,
+  FollowerBrowser,
   Loading,
   MobileProfile,
   PostBrowser,
@@ -33,14 +34,14 @@ const ProfileView = () => {
   const navigate = useNavigate();
   const [follow, setFlollow] = useState(false);
 
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     const data = await getUser(params);
     if (data.error) {
       setError(data.error);
     } else {
       setProfile(data);
     }
-  };
+  }, [params]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,7 +67,7 @@ const ProfileView = () => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [fetchUser, params]);
 
   const validate = (content) => {
     let error = '';
@@ -86,6 +87,7 @@ const ProfileView = () => {
           profileUser={profile.user}
           contentType="posts"
           key="posts"
+          userId={profile?.user?._id}
         />
       ),
       liked: (
@@ -93,9 +95,22 @@ const ProfileView = () => {
           profileUser={profile.user}
           contentType="liked"
           key="liked"
+          userId={profile?.user?._id}
         />
       ),
       comments: <CommentBrowser profileUser={profile.user} />,
+      following: (
+        <FollowerBrowser
+          userId={profile?.user?._id}
+          contentType="following"
+        />
+      ),
+      followers: (
+        <FollowerBrowser
+          userId={profile?.user?._id}
+          contentType="follower"
+        />
+      ),
     };
   }
 

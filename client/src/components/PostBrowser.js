@@ -2,7 +2,7 @@ import { Button, Card, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useGlobal } from 'hooks';
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { getPosts, getUserLikedPosts } from '../api/posts';
 import { isLoggedIn } from '../helpers/authHelper';
 import CreatePost from './CreatePost';
@@ -22,7 +22,6 @@ const PostBrowser = (props) => {
   const { translate } = useGlobal();
   const [search] = useSearchParams();
   const [effect, setEffect] = useState(false);
-  const params = useParams();
 
   const searchExists =
     search && search.get('search') && search.get('search').length > 0;
@@ -66,6 +65,7 @@ const PostBrowser = (props) => {
 
   useEffect(() => {
     fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy, effect]);
 
   useEffect(() => {
@@ -73,7 +73,8 @@ const PostBrowser = (props) => {
     setPage(0);
     setEnd(false);
     setEffect(!effect);
-  }, [search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, props.userId]);
 
   const handleSortBy = (e) => {
     const newSortName = e.target.value;

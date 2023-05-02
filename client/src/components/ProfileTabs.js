@@ -17,6 +17,8 @@ const ProfileTabs = (props) => {
         <Tab label={translate('posts')} value="posts" />
         <Tab label={translate('liked')} value="liked" />
         <Tab label={translate('commented')} value="comments" />
+        <Tab label={translate('following')} value="following" />
+        <Tab label={translate('followers')} value="followers" />
       </Tabs>
     </Card>
   );

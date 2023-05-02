@@ -152,24 +152,58 @@ const unfollow = async (req, res) => {
 };
 
 const getFollowers = async (req, res) => {
+  let dbUserId = [];
   try {
     const userId = req.params.id;
 
     const followers = await Follow.find({ followingId: userId });
 
-    return res.status(200).json({ data: followers });
+    followers.forEach((item) => {
+      dbUserId.push(item.userId.toString());
+    });
+
+    const usersInfo = await User.find(
+      {
+        _id: { $in: dbUserId },
+      },
+      {
+        password: 0,
+        email: 0,
+        isAdmin: 0,
+        __v: 0,
+      },
+    );
+
+    return res.status(200).json({ data: usersInfo });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
 };
 
 const getFollowing = async (req, res) => {
+  let dbUserId = [];
   try {
     const userId = req.params.id;
 
     const following = await Follow.find({ userId });
 
-    return res.status(200).json({ data: following });
+    following.forEach((item) => {
+      dbUserId.push(item.followingId.toString());
+    });
+
+    const usersInfo = await User.find(
+      {
+        _id: { $in: dbUserId },
+      },
+      {
+        password: 0,
+        email: 0,
+        isAdmin: 0,
+        __v: 0,
+      },
+    );
+
+    return res.status(200).json({ data: usersInfo });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
@@ -180,7 +214,7 @@ const getFollowed = async (req, res) => {
     const id = req.params.id;
     const { userId } = req.body;
 
-    const user = await User.findById(id).lean();
+    const user = await User.findById(id, { password: 0 }).lean();
 
     if (!user) {
       throw new Error('User does not exist');

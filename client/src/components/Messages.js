@@ -72,6 +72,7 @@ const Messages = (props) => {
 
   useEffect(() => {
     fetchMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.conservant]);
 
   useEffect(() => {
@@ -161,6 +162,7 @@ const Messages = (props) => {
 
   useEffect(() => {
     socket.on('receive-message', handleReceiveMessage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return props.conservant ? (

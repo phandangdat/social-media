@@ -10,7 +10,7 @@ const CommentBrowser = (props) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
-  const [end, setEnd] = useState(false);
+  const [, setEnd] = useState(false);
   const [sortBy, setSortBy] = useState('-createdAt');
   const { translate } = useGlobal();
 
@@ -31,6 +31,7 @@ const CommentBrowser = (props) => {
 
   useEffect(() => {
     fetchComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
 
   const handleSortBy = (e) => {

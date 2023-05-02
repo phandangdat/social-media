@@ -53,6 +53,8 @@ export const locales = {
     edited: 'Edited',
     follow: 'Follow',
     unfollow: 'Unfollow',
+    followers: 'Followers',
+    following: 'Following',
   },
   vn: {
     searchForPosts: 'Tìm kiếm bài viết...',
@@ -106,5 +108,7 @@ export const locales = {
     edited: 'Đã chỉnh sửa',
     follow: 'Theo dõi',
     unfollow: 'Bỏ theo dõi',
+    followers: 'Người theo dõi',
+    following: 'Đang theo dõi',
   },
 };

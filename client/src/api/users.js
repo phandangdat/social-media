@@ -117,6 +117,26 @@ const getFollowed = async (id, user) => {
   }
 };
 
+const getUserFollowing = async (id) => {
+  try {
+    const res = await fetch(BASE_URL + 'api/users/following/' + id);
+
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getUserFollower = async (id) => {
+  try {
+    const res = await fetch(BASE_URL + 'api/users/followers/' + id);
+
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export {
   signup,
   login,
@@ -126,4 +146,6 @@ export {
   followUser,
   unfollowUser,
   getFollowed,
+  getUserFollowing,
+  getUserFollower,
 };

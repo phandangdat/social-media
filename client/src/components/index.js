@@ -10,6 +10,7 @@ import CreatePost from './CreatePost';
 import ErrorAlert from './ErrorAlert';
 import FetchFail from './FetchFail';
 import FindUsers from './FindUsers';
+import FollowerBrowser from './FollowerBrowser';
 import Goback from './GoBack';
 import LikeBox from './LikeBox';
 import Loading from './Loading';
@@ -64,4 +65,5 @@ export {
   UserAvatar,
   UserMessengerEntries,
   UserMessengerEntry,
+  FollowerBrowser,
 };

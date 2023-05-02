@@ -11,3 +11,7 @@
 html {
   overflow-y: scroll;
 }
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
