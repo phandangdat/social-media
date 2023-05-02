@@ -61,7 +61,7 @@ const FollowerBrowser = (props) => {
                       <UserAvatar
                         width={50}
                         height={50}
-                        username="abc"
+                        username={user.username}
                       />
                       <Typography
                         sx={{
