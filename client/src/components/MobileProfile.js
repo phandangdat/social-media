@@ -98,16 +98,27 @@ const MobileProfile = (props) => {
                 </i>
               </Typography>
             )}
-            {currentUser && user._id !== currentUser.userId && (
-              <Box sx={{ mt: 2 }}>
+            <HorizontalStack sx={{ mt: 2 }}>
+              {currentUser && user._id !== currentUser.userId && (
                 <Button
                   variant="outlined"
                   onClick={props.handleMessage}
                 >
                   Message
                 </Button>
-              </Box>
-            )}
+              )}
+              {currentUser && user._id !== currentUser.userId && (
+                <Button
+                  variant="outlined"
+                  onClick={props.handleFollow}
+                >
+                  {props.follow
+                    ? translate('unfollow')
+                    : translate('follow')}
+                </Button>
+              )}
+            </HorizontalStack>
+
             {props.editing && (
               <Box>
                 <ContentUpdateEditor

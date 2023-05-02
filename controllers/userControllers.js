@@ -96,7 +96,7 @@ const follow = async (req, res) => {
 
     const existingFollow = await Follow.find({ userId, followingId });
 
-    if (existingFollow) {
+    if (existingFollow.length > 0) {
       throw new Error('Already following this user');
     }
 
@@ -135,9 +135,11 @@ const unfollow = async (req, res) => {
     const { userId } = req.body;
     const followingId = req.params.id;
 
-    const existingFollow = await Follow.find({ userId, followingId });
-
-    if (!existingFollow) {
+    const existingFollow = await Follow.findOne({
+      userId,
+      followingId,
+    });
+    if (existingFollow <= 0) {
       throw new Error('Not already following user');
     }
 
@@ -168,6 +170,27 @@ const getFollowing = async (req, res) => {
     const following = await Follow.find({ userId });
 
     return res.status(200).json({ data: following });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
+const getFollowed = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { userId } = req.body;
+
+    const user = await User.findById(id).lean();
+
+    if (!user) {
+      throw new Error('User does not exist');
+    }
+
+    if (userId) {
+      await setFollowed([user], userId);
+    }
+
+    return res.status(200).json(user);
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
@@ -245,6 +268,22 @@ const getRandomIndices = (size, sourceSize) => {
   return randomIndices;
 };
 
+const setFollowed = async (users, userId) => {
+  let searchCondition = {};
+  if (userId) searchCondition = { userId };
+
+  const userFollowed = await Follow.find(searchCondition); //userId needed
+
+  users.forEach((user) => {
+    userFollowed.forEach((followed) => {
+      if (followed.followingId.equals(user._id)) {
+        user.followed = true;
+        return;
+      }
+    });
+  });
+};
+
 module.exports = {
   register,
   login,
@@ -252,6 +291,7 @@ module.exports = {
   unfollow,
   getFollowers,
   getFollowing,
+  getFollowed,
   getUser,
   getRandomUsers,
   updateUser,

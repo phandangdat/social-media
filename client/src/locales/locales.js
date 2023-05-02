@@ -51,6 +51,8 @@ export const locales = {
     commented: 'commented',
     yourConversations: 'Your conversations',
     edited: 'Edited',
+    follow: 'Follow',
+    unfollow: 'Unfollow',
   },
   vn: {
     searchForPosts: 'Tìm kiếm bài viết...',
@@ -102,5 +104,7 @@ export const locales = {
     commented: 'Đã bình luận',
     yourConversations: 'Tin nhắn của bạn',
     edited: 'Đã chỉnh sửa',
+    follow: 'Theo dõi',
+    unfollow: 'Bỏ theo dõi',
   },
 };

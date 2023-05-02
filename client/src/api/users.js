@@ -69,4 +69,61 @@ const updateUser = async (user, data) => {
   }
 };
 
-export { signup, login, getUser, getRandomUsers, updateUser };
+const followUser = async (user, id) => {
+  try {
+    const res = await fetch(BASE_URL + 'api/users/follow/' + id, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': user.token,
+      },
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const unfollowUser = async (user, id) => {
+  try {
+    const res = await fetch(BASE_URL + 'api/users/unfollow/' + id, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': user.token,
+      },
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getFollowed = async (id, user) => {
+  try {
+    const res = await fetch(BASE_URL + 'api/users/followed/' + id, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': user.token,
+      },
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export {
+  signup,
+  login,
+  getUser,
+  getRandomUsers,
+  updateUser,
+  followUser,
+  unfollowUser,
+  getFollowed,
+};

@@ -12,6 +12,7 @@ router.patch('/:id', verifyToken, userControllers.updateUser);
 
 router.post('/follow/:id', verifyToken, userControllers.follow);
 router.delete('/unfollow/:id', verifyToken, userControllers.unfollow);
+router.get('/followed/:id', verifyToken, userControllers.getFollowed);
 
 router.get('/followers/:id', userControllers.getFollowers);
 router.get('/following/:id', userControllers.getFollowing);

@@ -1,5 +1,11 @@
 import { Container, Stack } from '@mui/material';
-import { getUser, updateUser } from 'api/users';
+import {
+  followUser,
+  getFollowed,
+  getUser,
+  unfollowUser,
+  updateUser,
+} from 'api/users';
 import {
   CommentBrowser,
   ErrorAlert,
@@ -14,7 +20,7 @@ import { isLoggedIn } from 'helpers/authHelper';
 import Footer from 'layout/Footer';
 import GridLayout from 'layout/GridLayout';
 import Navbar from 'layout/Navbar';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ProfileView = () => {
@@ -25,6 +31,7 @@ const ProfileView = () => {
   const [error, setError] = useState('');
   const params = useParams();
   const navigate = useNavigate();
+  const [follow, setFlollow] = useState(false);
 
   const fetchUser = async () => {
     const data = await getUser(params);
@@ -92,6 +99,35 @@ const ProfileView = () => {
     };
   }
 
+  const handleFollow = async () => {
+    if (!follow) {
+      const res = await followUser(user, profile.user._id);
+      if (res.data) {
+        setFlollow(true);
+      }
+    } else {
+      const res = await unfollowUser(user, profile.user._id);
+      if (res.data) {
+        setFlollow(false);
+      }
+    }
+  };
+
+  const getUserFollowed = useCallback(async () => {
+    const data = await getFollowed(profile?.user?._id, user);
+    if (data.error) {
+      console.log(data.error);
+    } else {
+      setFlollow(data.followed);
+    }
+  }, [profile?.user?._id, user]);
+
+  useEffect(() => {
+    if (profile?.user) {
+      getUserFollowed();
+    }
+  }, [getUserFollowed, profile?.user]);
+
   return (
     <Container maxWidth="lg">
       <Navbar />
@@ -106,6 +142,8 @@ const ProfileView = () => {
               handleEditing={handleEditing}
               handleMessage={handleMessage}
               validate={validate}
+              follow={follow}
+              handleFollow={handleFollow}
             />
             <Stack spacing={2}>
               {profile ? (
@@ -130,6 +168,8 @@ const ProfileView = () => {
               handleEditing={handleEditing}
               handleMessage={handleMessage}
               validate={validate}
+              follow={follow}
+              handleFollow={handleFollow}
             />
 
             <FindUsers />

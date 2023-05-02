@@ -2,7 +2,7 @@ import { Button, Card, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useGlobal } from 'hooks';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { getPosts, getUserLikedPosts } from '../api/posts';
 import { isLoggedIn } from '../helpers/authHelper';
 import CreatePost from './CreatePost';
@@ -22,6 +22,7 @@ const PostBrowser = (props) => {
   const { translate } = useGlobal();
   const [search] = useSearchParams();
   const [effect, setEffect] = useState(false);
+  const params = useParams();
 
   const searchExists =
     search && search.get('search') && search.get('search').length > 0;

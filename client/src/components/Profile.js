@@ -86,6 +86,14 @@ const Profile = (props) => {
               {translate('posts')}: <b>{props.profile.posts.count}</b>
             </Typography>
           </HorizontalStack>
+
+          {currentUser && user._id !== currentUser.userId && (
+            <Button variant="outlined" onClick={props.handleFollow}>
+              {props.follow
+                ? translate('unfollow')
+                : translate('follow')}
+            </Button>
+          )}
         </Stack>
       ) : (
         <Loading label="Loading profile" />
