@@ -9,6 +9,7 @@ import { Box } from '@mui/system';
 import { signup } from 'api/users';
 import { Copyright, ErrorAlert, Logo } from 'components';
 import { loginUser } from 'helpers/authHelper';
+import { useGlobal } from 'hooks';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { contains, isEmail, isLength } from 'validator';
@@ -17,7 +18,7 @@ const SignupView = () => {
   const navigate = useNavigate();
   const [serverError, setServerError] = useState('');
   const [errors, setErrors] = useState({});
-
+  const { translate } = useGlobal();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -75,14 +76,15 @@ const SignupView = () => {
           <Logo sx={{ fontSize: '70px', mb: 2 }} />
         </Link>
         <Typography variant="h5" gutterBottom>
-          Sign Up
+          {translate('signUp')}
         </Typography>
         <Typography color="text.secondary">
-          Already have an account? <Link to="/login">Login</Link>
+          {translate('alreadyHaveAnAccount')}{' '}
+          <Link to="/login">{translate('login')}</Link>
         </Typography>
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
-            label="Username"
+            label={translate('userName')}
             fullWidth
             margin="normal"
             autoFocus
@@ -94,7 +96,7 @@ const SignupView = () => {
             helperText={errors.username}
           />
           <TextField
-            label="Email Address"
+            label={translate('emailAddress')}
             fullWidth
             margin="normal"
             autoComplete="email"
@@ -106,7 +108,7 @@ const SignupView = () => {
             helperText={errors.email}
           />
           <TextField
-            label="Password"
+            label={translate('password')}
             fullWidth
             required
             margin="normal"
@@ -125,7 +127,7 @@ const SignupView = () => {
             variant="contained"
             sx={{ my: 2 }}
           >
-            Sign Up
+            {translate('signUp')}
           </Button>
         </Box>
         <Box sx={{ mt: 3 }}>

@@ -85,7 +85,7 @@ const CommentBrowser = (props) => {
               gutterBottom
             >
               {comments.length > 0 ? (
-                <>All comments have been viewed</>
+                <>{translate('allCommentsHaveBeenViewed')}</>
               ) : (
                 <>{translate('noCommentsAvailable')}</>
               )}

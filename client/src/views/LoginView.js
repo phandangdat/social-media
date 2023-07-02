@@ -9,12 +9,13 @@ import { Box } from '@mui/system';
 import { login } from 'api/users';
 import { Copyright, ErrorAlert, Logo } from 'components';
 import { loginUser } from 'helpers/authHelper';
+import { useGlobal } from 'hooks';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginView = () => {
   const navigate = useNavigate();
-
+  const { translate } = useGlobal();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -45,14 +46,15 @@ const LoginView = () => {
           <Logo sx={{ fontSize: '70px', mb: 2 }} />
         </Link>
         <Typography variant="h5" gutterBottom>
-          Login
+          {translate('login')}
         </Typography>
         <Typography color="text.secondary">
-          Don't have an account yet? <Link to="/signup">Sign Up</Link>
+          {translate('dontHaveAnAccountYet')}{' '}
+          <Link to="/signup">{translate('signUp')}</Link>
         </Typography>
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
-            label="Email Address"
+            label={translate('emailAddress')}
             fullWidth
             margin="normal"
             autoComplete="email"
@@ -63,7 +65,7 @@ const LoginView = () => {
             onChange={handleChange}
           />
           <TextField
-            label="Password"
+            label={translate('password')}
             fullWidth
             required
             margin="normal"
@@ -80,7 +82,7 @@ const LoginView = () => {
             variant="contained"
             sx={{ my: 2 }}
           >
-            Login
+            {translate('login')}
           </Button>
         </Box>
         <Box sx={{ mt: 3 }}>

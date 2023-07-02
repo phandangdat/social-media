@@ -200,18 +200,37 @@ const unlikePost = async (postId, user) => {
   }
 };
 
+const getUserLikes = async (postId, anchor) => {
+  try {
+    const res = await fetch(
+      BASE_URL +
+        'api/posts/like/' +
+        postId +
+        '/users?' +
+        new URLSearchParams({
+          anchor,
+        }),
+    );
+
+    return await res.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export {
-  getPost,
+  createComment,
   createPost,
-  updatePost,
+  deleteComment,
   deletePost,
+  getComments,
+  getPost,
   getPosts,
   getUserComments,
   getUserLikedPosts,
-  getComments,
-  createComment,
-  deleteComment,
-  updateComment,
+  getUserLikes,
   likePost,
   unlikePost,
+  updateComment,
+  updatePost,
 };

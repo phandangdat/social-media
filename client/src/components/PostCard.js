@@ -33,6 +33,7 @@ import Markdown from './Markdown';
 import { useGlobal } from 'hooks';
 import { BiTrash } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
+import UserLikePreview from './UserLikePreview';
 import './postCard.css';
 
 const PostCard = (props) => {
@@ -189,15 +190,26 @@ const PostCard = (props) => {
                 </Box>
               ))}
 
-            <HorizontalStack sx={{ mt: 1 }}>
-              <AiFillMessage />
-              <Typography
-                variant="subtitle2"
-                color="text.secondary"
-                sx={{ fontWeight: 'bold' }}
-              >
-                {post.commentCount}
-              </Typography>
+            <HorizontalStack
+              sx={{ mt: 2 }}
+              justifyContent="space-between"
+            >
+              <HorizontalStack>
+                <AiFillMessage />
+                <Typography
+                  variant="subtitle2"
+                  color="text.secondary"
+                  sx={{ fontWeight: 'bold' }}
+                >
+                  {post.commentCount}
+                </Typography>
+              </HorizontalStack>
+              <Box>
+                <UserLikePreview
+                  postId={post._id}
+                  userLikePreview={post.userLikePreview}
+                />
+              </Box>
             </HorizontalStack>
           </PostContentBox>
         </HorizontalStack>

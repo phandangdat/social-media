@@ -1,12 +1,11 @@
-import {
-  Button, Stack,
-  TextField
-} from '@mui/material';
-import React, { useState } from 'react';
+import { Button, Stack, TextField } from '@mui/material';
+import { useGlobal } from 'hooks';
+import { useState } from 'react';
 import HorizontalStack from './util/HorizontalStack';
 
 const SendMessage = (props) => {
   const [content, setContent] = useState('');
+  const { translate } = useGlobal();
 
   const handleSendMessage = () => {
     props.onSendMessage(content);
@@ -24,7 +23,7 @@ const SendMessage = (props) => {
       <HorizontalStack>
         <TextField
           onChange={(e) => setContent(e.target.value)}
-          label="Send a message..."
+          label={translate('sendAMessage')}
           fullWidth
           value={content}
           autoComplete="off"
@@ -40,7 +39,7 @@ const SendMessage = (props) => {
           onClick={handleSendMessage}
           disabled={content.length === 0}
         >
-          Send
+          {translate('send')}
         </Button>
       </HorizontalStack>
     </Stack>

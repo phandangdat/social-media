@@ -5,3 +5,26 @@
 .markdown :last-child {
   margin-bottom: 0;
 }
+
+.markdown img {
+  max-width: 100%;
+}
+
+.markdown>pre {
+  background: #F1F1F1;
+  border: 1px solid #E1E1E1;
+  color: black;
+  border-radius: 4px;
+  font-size: 90%;
+  padding: 0.2rem 0.5rem;
+  overflow-x: auto;
+}
+
+.markdown>p>code {
+  background: #F1F1F1;
+  border: 1px solid #E1E1E1;
+  color: black;
+  border-radius: 4px;
+  font-size: 90%;
+  padding: 0.1rem;
+}

@@ -20,5 +20,6 @@ router.get(
   optionallyVerifyToken,
   postControllers.getUserLikedPosts,
 );
+router.get('/like/:postId/users', postControllers.getUserLikes);
 
 module.exports = router;

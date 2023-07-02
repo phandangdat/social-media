@@ -29,6 +29,9 @@ import SendMessage from './SendMessage';
 import SortBySelect from './SortBySelect';
 import TopPosts from './TopPosts';
 import UserAvatar from './UserAvatar';
+import UserEntry from './UserEntry';
+import UserLikeModal from './UserLikeModal';
+import UserLikePreview from './UserLikePreview';
 import UserMessengerEntries from './UserMessengerEntries';
 import UserMessengerEntry from './UserMessengerEntry';
 
@@ -45,6 +48,7 @@ export {
   ErrorAlert,
   FetchFail,
   FindUsers,
+  FollowerBrowser,
   Goback,
   LikeBox,
   Loading,
@@ -63,7 +67,9 @@ export {
   SortBySelect,
   TopPosts,
   UserAvatar,
+  UserEntry,
+  UserLikeModal,
+  UserLikePreview,
   UserMessengerEntries,
   UserMessengerEntry,
-  FollowerBrowser,
 };

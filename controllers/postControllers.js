@@ -5,6 +5,8 @@ const PostLike = require('../models/PostLike');
 const paginate = require('../util/paginate');
 const cooldown = new Set();
 
+USER_LIKES_PAGE_SIZE = 9;
+
 const createPost = async (req, res) => {
   try {
     const { title, content, userId } = req.body;
@@ -56,6 +58,8 @@ const getPost = async (req, res) => {
     if (userId) {
       await setLiked([post], userId);
     }
+
+    await enrichWithUserLikePreview([post]);
 
     return res.json(post);
   } catch (err) {
@@ -131,6 +135,27 @@ const setLiked = async (posts, userId) => {
   });
 };
 
+const enrichWithUserLikePreview = async (posts) => {
+  const postMap = posts.reduce((result, post) => {
+    result[post._id] = post;
+    return result;
+  }, {});
+
+  const postLikes = await PostLike.find({
+    postId: { $in: Object.keys(postMap) },
+  })
+    .limit(200)
+    .populate('userId', 'username');
+
+  postLikes.forEach((postLike) => {
+    const post = postMap[postLike.postId];
+    if (!post.userLikePreview) {
+      post.userLikePreview = [];
+    }
+    post.userLikePreview.push(postLike.userId);
+  });
+};
+
 const getUserLikedPosts = async (req, res) => {
   try {
     const likerId = req.params.id;
@@ -157,6 +182,8 @@ const getUserLikedPosts = async (req, res) => {
     if (userId) {
       await setLiked(responsePosts, userId);
     }
+
+    await enrichWithUserLikePreview(responsePosts);
 
     return res.json({ data: responsePosts, count });
   } catch (err) {
@@ -196,6 +223,8 @@ const getPosts = async (req, res) => {
     if (userId) {
       await setLiked(posts, userId);
     }
+
+    await enrichWithUserLikePreview(posts);
 
     return res.json({ data: posts, count });
   } catch (err) {
@@ -270,6 +299,41 @@ const unlikePost = async (req, res) => {
   }
 };
 
+const getUserLikes = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const { anchor } = req.query;
+
+    const postLikesQuery = PostLike.find({ postId: postId })
+      .sort('_id')
+      .limit(USER_LIKES_PAGE_SIZE + 1)
+      .populate('userId', 'username');
+
+    if (anchor) {
+      postLikesQuery.where('_id').gt(anchor);
+    }
+
+    const postLikes = await postLikesQuery.exec();
+
+    const hasMorePages = postLikes.length > USER_LIKES_PAGE_SIZE;
+
+    if (hasMorePages) postLikes.pop();
+
+    const userLikes = postLikes.map((like) => {
+      return {
+        id: like._id,
+        username: like.userId.username,
+      };
+    });
+
+    return res
+      .status(200)
+      .json({ userLikes: userLikes, hasMorePages, success: true });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+};
+
 module.exports = {
   getPost,
   getPosts,
@@ -279,4 +343,5 @@ module.exports = {
   likePost,
   unlikePost,
   getUserLikedPosts,
+  getUserLikes,
 };
